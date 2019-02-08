@@ -1,68 +1,89 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TRAVL TRAKR:
 
-## Available Scripts
+Travel tracking app, for either future or past travel. Get ideas of what to do, and familiarize yourself with where you'll be.
 
-In the project directory, you can run:
+### User Story
 
-### `npm start`
+Initial Page: User can log in or register. To log in they provide username/password. To register, they provide username, email, password.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+After login: User is taken to their page. It'll show their information, and then a list of their past or upcoming trips. The list will be displayed with links to the individual trip show pages.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Trip showpage: This will contain information provided by the user regarding the trip in a notes location. It will also contact the Google Maps API to show a map of the city where the trip is to, and also the Yelp API to pull up a list and links to "hot and new" places in the location of the trip. From this page, the user can click on edit to be taken to the edit component.
 
-### `npm test`
+Edit Trip: Here the user can update the date of the trip and the location of the trip, as well as additional notes they have for their travels. There will be a button to delete the trip.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+All pages will have a nav bar up top that allows a user to go to a create trip page.
 
-### `npm run build`
+Create Trip: User provides the city, country, dates of travel, and any notes about their trip on this page. They will be redirected to the show page when they enter the trip.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### API usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Local API would be the cities the person entered. Any notes they have about the places, name, country, dates, etc.
 
-### `npm run eject`
+The remote API would be the google maps/google information and Yelp’s API for some business information in the city.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I’ve already signed up for the APIs for Yelp and Google
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### React breakdown
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+App container will hold a user container and city container.
+User container has the user renders for the user page.
+City container will hold the city renders which have the edits, and shows for the cities.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Backend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+SERVER INFORMATION:
 
-### Code Splitting
+Routes: Post '/login' login.
+		Post to '/' to add user.
+		Get '/user/:id' to get information re: user.
+		Put '/user/:id/' will edit the users information. Name, email, password.
+		Delete '/user/:id' will remove the user.
+		Get '/cities' will get all the trips a person is taking.
+		Post '/cities' will add the trip using the model.
+		Get '/cities/:id' will get the information for the specific trip.
+		Put '/cities/:id' will edit the information re: the trip.
+		Delete '/cities/:id' will delete the trip from the user and the database.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
+SERVER MODELS: 
+	User: {
+		name: '',
+		email: '',
+		password: '',
+		trips: [{trip model}]
+	}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+	Trip: {
+		name: '',
+		country: '',
+		dateArrived: //,
+		dateLeft: //,
+		Notes: ['','']
+	}
 
-### Making a Progressive Web App
+### Goals
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+	MVP: Have the app allow users to be made, edited and deleted. Keep their trips. Access some outside information (map, places to visit). Fullfil CRUD for users and trips.
 
-### Advanced Configuration
+	Stretch: 
+		1.	Incorporate a social networking component, where users can access each other's pages and somehow interact. Or see other peoples trips, without the dates of travel (for security).
+		2.	Have photos added.
+		3.	More interactivity with the outside APIs to provide better and more focused information (food vs. events. Hot and new vs. most reviewed). Use some of the additional Google APIs (like street view).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+
+
+
+
+
+
