@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from '../Login';
 import Register from '../Register';
 import UserPage from '../UserPage';
+import TripContainer from '../TripContainer';
 
 
 class UserContainer extends Component {
@@ -14,6 +15,7 @@ class UserContainer extends Component {
 			_id: ''
 		}
 	}
+
 	login = (user) => {
 		this.setState({
 			loggedIn: true,
@@ -21,14 +23,21 @@ class UserContainer extends Component {
 			_id: user._id
 		});
 	}
+
 	render() {
 		return (
 			<div>
-				User Container
-				<Login history={this.props.history} login={this.login}/>
-				<Register history={this.props.history} login={this.login}/>
-
-				{this.state.loggedIn ? <UserPage username={this.state.username} _id={this.state._id} /> : null}
+				
+				{this.state.loggedIn ? 
+					<div>
+						<UserPage history={this.props.history} username={this.state.username} _id={this.state._id} />
+						<TripContainer history={this.props.history} username={this.state.username} _id={this.state._id}/>
+					</div>
+					: <div>
+						<Login history={this.props.history} login={this.login}/>
+						<Register history={this.props.history} login={this.login}/>
+					</div>
+				}
 				
 			</div>
 		)

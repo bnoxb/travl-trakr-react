@@ -24,7 +24,6 @@ const App = () => {
 		<main>
 			<Switch>
 				<Route exact path="/" component={ UserContainer }/>
-				<Route exact path="/trips" component={ TripContainer }/>
 				<Route component={ My404 }/>
 			</Switch>
 		</main>

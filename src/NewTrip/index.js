@@ -6,7 +6,11 @@ class NewTrip extends Component {
 		super();
 
 		this.state = {
-
+			name: '',
+			country: '',
+			dateArrived: '',
+			dateLeft: '',
+			notes: ''
 		}
 	}
 
@@ -16,46 +20,12 @@ class NewTrip extends Component {
 		})
 	}
 
-	handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const tripCreateResponse = await fetch('http://localhost:9000/trips/', {
-				method: 'POST',
-				credentials: 'include',
-				body: JSON.stringify(this.state),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-
-			if(!tripCreateResponse.ok) {
-				throw Error(tripCreateResponse.statusText);
-			}
-
-			const parsedResponse = await tripCreateResponse.json();
-
-			if(parsedResponse.data.message === 'created successfully') {
-				this.props.history.push('/');
-			}
-
-			console.log(parsedResponse);
-
-
-
-
-		} catch(err) {
-			console.log(err);
-		}
-	}
-
-
-
 
 	render() {
 		return (
 			<div>
 				<div>NewTrip</div>
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.props.addTrip.bind(null, this.state)}>
 					<input type='text' name='name' onChange={this.handleChange} /><br/>
 					<label>
 						Date of Arrival
