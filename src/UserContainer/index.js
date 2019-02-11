@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Login from '../Login';
+import Register from '../Register';
+import { Route , withRouter} from 'react-router-dom';
 
 
 class UserContainer extends Component {
@@ -9,7 +11,7 @@ class UserContainer extends Component {
 		this.state = {
 			loggedIn: false,
 			username: '',
-			
+
 
 		};
 	}
@@ -18,7 +20,8 @@ class UserContainer extends Component {
 		return (
 			<div>
 				User Container
-				<Login />
+				<Login history={this.props.history}/>
+				<Register history={this.props.history}/>
 			</div>
 		)
 	}

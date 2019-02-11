@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-class Login extends Component {
+class Register extends Component {
 	constructor() {
 		super();
 
-
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			email: ''
 		}
 	}
 
-	handleChange = (e) => {
+		handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		})
@@ -20,7 +20,7 @@ class Login extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const loginResponse = await fetch('http://localhost:9000/auth/login', {
+			const loginResponse = await fetch('http://localhost:9000/auth/', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(this.state),
@@ -35,9 +35,13 @@ class Login extends Component {
 
 			const parsedResponse = await loginResponse.json();
 
-			if(parsedResponse.data === 'login successful') {
-				this.props.history.push('/trips');
+			if(parsedResponse.data === 'user creation successful') {
+				this.props.history.push('/trip');
 			}
+
+
+
+
 		} catch(err) {
 			console.log(err, ' this is err');
 		}
@@ -48,6 +52,7 @@ class Login extends Component {
 			<div>
 				<form onSubmit={this.handleSubmit}>
 					<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />
+					<input type='text' name='email' onChange={this.handleChange} placeholder='Enter Email' />
 					<input type='password' name='password' onChange={this.handleChange} placeholder='Enter Password' />
 					<button>Login</button>
 				</form>
@@ -56,4 +61,4 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+export default Register;
