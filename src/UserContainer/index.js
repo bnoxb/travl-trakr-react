@@ -7,6 +7,9 @@ class UserContainer extends Component {
 		super();
 
 		this.state = {
+			loggedIn: false,
+			username: '',
+			
 
 		};
 	}
