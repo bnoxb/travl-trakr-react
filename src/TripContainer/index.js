@@ -15,7 +15,7 @@ class TripContainer extends Component {
 		return(
 			<div>
 				TripContainer
-				<NewTrip />
+				<NewTrip history={this.props.history}/>
 			</div>
 
 		)
