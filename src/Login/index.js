@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
-import Login from '../Login';
 
-
-class UserContainer extends Component {
+class Login extends Component {
 	constructor() {
 		super();
 
+
 		this.state = {
 
-		};
+		}
 	}
 
 	render() {
 		return (
 			<div>
-				User Container
-				<Login />
+				Login
 			</div>
 		)
 	}
-
 }
 
-
-export default UserContainer;
+export default Login;
