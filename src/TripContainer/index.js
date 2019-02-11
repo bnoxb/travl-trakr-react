@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NewTrip from '../NewTrip';
 
 
 class TripContainer extends Component {
@@ -14,6 +15,7 @@ class TripContainer extends Component {
 		return(
 			<div>
 				TripContainer
+				<NewTrip />
 			</div>
 
 		)

@@ -34,7 +34,6 @@ class Register extends Component {
 			}
 
 			const parsedResponse = await loginResponse.json();
-			console.log(parsedResponse, ' this is parsedResponse');
 
 			this.props.login(parsedResponse.data.user);
 
