@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewTrip from '../NewTrip';
+import TripPage from '../TripPage';
 
 
 class TripContainer extends Component {
@@ -16,6 +17,7 @@ class TripContainer extends Component {
 			<div>
 				TripContainer
 				<NewTrip history={this.props.history}/>
+				<TripPage />
 			</div>
 
 		)
