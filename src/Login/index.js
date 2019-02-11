@@ -34,10 +34,9 @@ class Login extends Component {
 			}
 
 			const parsedResponse = await loginResponse.json();
-
-			if(parsedResponse.data === 'login successful') {
-				this.props.history.push('/trips');
-			}
+			console.log(parsedResponse, ' this is parsedResponse');
+			this.props.login(parsedResponse.data.user);
+			console.log(parsedResponse.data.user, ' this parsedResoonsedatauser');
 		} catch(err) {
 			console.log(err, ' this is err');
 		}

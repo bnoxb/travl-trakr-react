@@ -11,7 +11,7 @@ class Register extends Component {
 		}
 	}
 
-		handleChange = (e) => {
+	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		})
@@ -34,10 +34,9 @@ class Register extends Component {
 			}
 
 			const parsedResponse = await loginResponse.json();
+			console.log(parsedResponse, ' this is parsedResponse');
 
-			if(parsedResponse.data === 'user creation successful') {
-				this.props.history.push('/trip');
-			}
+			this.props.login(parsedResponse.data.user);
 
 
 
