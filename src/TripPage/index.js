@@ -11,24 +11,32 @@ class TripPage extends Component {
 	}
 
 	componentDidMount() {
-		this.getTrip();
+		this.getYelp();
+		// this.getGoogleMap();
 	}
 
-	getTrip = async () => {
+	getYelp = async () => {
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/users/${this.props._id}`, {
+			console.log(this.props.currentTrip, ' currentRtip');
+			const response = await fetch(`http://localhost:9000/trips/yelp/${this.props.currentTrip._id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
 				throw Error(response.statusText);
 			}
-			const tripParsed = await response.json();
-			this.setState({
-				user: tripParsed.data
-			})
+			const parsedResponse = await response.json();
+			console.log(parsedResponse);
 		} catch(err) {
 			console.log(err);
 			return err;
+		}
+	}
+
+	getGoogleMap = async () => {
+		try {
+
+		} catch(err) {
+
 		}
 	}
 
@@ -37,7 +45,7 @@ class TripPage extends Component {
 		return(
 			<div>
 				<h1>SHOW TRIP</h1>
-				<h3>{this.state.trip.name}</h3>
+				<h3>{this.props.currentTrip.name}</h3>
 
 			</div>
 
