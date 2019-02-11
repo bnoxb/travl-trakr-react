@@ -16,6 +16,7 @@ class TripList extends Component {
 				return <li key={trip._id}>
 						<span>{trip.name}</span><br/>
 						<small>{trip.country}</small><br/>
+						<button onClick={this.props.showTrip.bind(null, trip)}>Show</button>
 					</li>
 				});
 		} else {

@@ -9,7 +9,9 @@ class TripContainer extends Component {
 		super();
 		this.state = {
 			trips: [],
-			newTripScreen: false
+			newTripScreen: false,
+			currentTrip: {},
+			showTripScreen: false
 		}
 	}
 
@@ -55,6 +57,25 @@ class TripContainer extends Component {
 		})
 	}
 
+	showTrip = async (trip, e) => {
+		try {
+			const response = await fetch(`http://localhost:9000/trips/${trip._id}`, {
+				credentials: 'include'
+			});
+			if(!response.ok){
+				throw Error(response.statusText);
+			}
+			const tripParsed = await response.json();
+			this.setState({
+				currentTrip: tripParsed.data,
+				showTripScreen: true
+			})
+		} catch(err) {
+			console.log(err);
+			return err;
+		}
+	}
+
 	getTrips = async () => {
 		try {
 			const response = await fetch(`http://localhost:9000/api/v1/users/${this.props._id}`, {
@@ -78,7 +99,7 @@ class TripContainer extends Component {
 			<div>
 				{this.state.newTripScreen ? <NewTrip history={this.props.history} addTrip={this.addTrip} /> : <button onClick={this.newTrip}>Make a NewTrip</button>}
 				<TripList trips={this.state.trips} showTrip={this.showTrip} />
-				<TripPage />
+				{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip}/> : null}
 			</div>
 
 		)
