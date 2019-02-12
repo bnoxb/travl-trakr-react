@@ -4,7 +4,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const style = {
 	width: '100%',
-	height: '100%'
+	height: '80%'
 }
 
 
@@ -12,12 +12,15 @@ export class MapContainer extends Component {
 
 	render() {
 		const yelpsList = this.props.yelps.map((yelp, i) => {
-			let iconUrl;
 			return <Marker 
 						key= {i}
 						position={{
 							lng: yelp.coordinates.longitude,
 							lat: yelp.coordinates.latitude
+						}}
+						icon={{
+							url: `mapicons/number_${i + 1}.png`
+							// scaledSize: {width: 20, height: 20}
 						}}
 					/>
 		});
@@ -32,8 +35,7 @@ export class MapContainer extends Component {
 					lng: this.props.lng
 				}}
 				>
-				<Marker onClick={this.onMarkerClick}
-						name={'Current location'} />
+
 				{yelpsList}
 			</Map>
 		)

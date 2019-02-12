@@ -43,7 +43,7 @@ class TripPage extends Component {
 	render() {
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
-				{yelp.name}
+				{i + 1} {yelp.name}
 			</li>
 		})
 		return(
