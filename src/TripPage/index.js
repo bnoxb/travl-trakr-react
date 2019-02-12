@@ -8,7 +8,10 @@ class TripPage extends Component {
 
 		this.state = {
 			trip: {},
-			yelps: []
+			yelps: [],
+			lat: 0,
+			lng: 0,
+			loading: true
 		}
 	}
 
@@ -27,19 +30,14 @@ class TripPage extends Component {
 			const parsedResponse = await response.json();
 			console.log(parsedResponse, ' PARSED RESPONSE');
 			this.setState({
-				yelps: parsedResponse.data.jsonBody.businesses
+				yelps: parsedResponse.data.jsonBody.businesses,
+				lat: parsedResponse.data.jsonBody.region.center.latitude,
+				lng: parsedResponse.data.jsonBody.region.center.longitude,
+				loading: false
 			})
 		} catch(err) {
 			console.log(err);
 			return err;
-		}
-	}
-
-	getGoogleMap = async () => {
-		try {
-
-		} catch(err) {
-
 		}
 	}
 
@@ -53,11 +51,12 @@ class TripPage extends Component {
 			<div>
 				<h1>SHOW TRIP</h1>
 				<h3>{this.props.currentTrip.name}</h3>
-				<button onClick={this.props.hideTrip}>Back to List</button>
 				<ul>
 					{yelpList}
 				</ul>
-				<MapContainer yelps={this.state.yelps}/>
+				<button onClick={this.props.hideTrip}>Back to List</button>
+				{this.state.loading ? null : <MapContainer yelps={this.state.yelps} lat={this.state.lat} lng={this.state.lng}/>}
+
 			</div>
 
 

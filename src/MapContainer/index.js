@@ -3,14 +3,15 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
 const style = {
-	width: '40%',
-	height: '100%'
+	width: '100%',
+	height: '50%'
 }
 
 
 export class MapContainer extends Component {
 
 	render() {
+		console.log(this.props.lat);
 		const yelpsList = this.props.yelps.map((yelp, i) => {
 			let iconUrl;
 			return <Marker 
@@ -23,11 +24,14 @@ export class MapContainer extends Component {
 		});
 		return (
 
-
 			<Map
 				google={this.props.google}
 				style={style}
-				zoom={4}
+				zoom={10}
+				initialCenter={{
+					lat: this.props.lat,
+					lng: this.props.lng
+				}}
 				>
 				<Marker onClick={this.onMarkerClick}
 						name={'Current location'} />
@@ -38,5 +42,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-	apiKey: 'AIzaSyBHLett8djBo62dDXj0EjCimF8Rd6E8cxg'
+	apiKey: 'AIzaSyDVsJgiL0yPXQQJWNQztdG2YJYzROdZ8Mg'
 })(MapContainer);
