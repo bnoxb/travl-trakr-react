@@ -42,12 +42,17 @@ class TripPage extends Component {
 	}
 
 	render() {
-		console.log(this.props.currentTrip.dateArrived);
+		let calendar;
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
 				{i + 1} {yelp.name}
 			</li>
 		})
+		if(formattedDateArrived != 'Invalid Date' && formattedDateLeft != 'Invalid Date') {
+			calendar = <Calendar value={[formattedDateArrived, formattedDateLeft]} />
+		} else {
+			calendar = <br/>
+		}
 		const formattedDateArrived = new Date(`${this.props.currentTrip.dateArrived}`);
 		const formattedDateLeft = new Date(`${this.props.currentTrip.dateLeft}`);
 		return(
@@ -57,7 +62,7 @@ class TripPage extends Component {
 				<p>{this.props.currentTrip.state}</p>
 				<p>{this.props.currentTrip.country}</p>
 				<p>{this.props.currentTrip.notes}</p>
-				<Calendar value={[formattedDateArrived, formattedDateLeft]} />
+				{calendar}
 				<ul>
 					{yelpList}
 				</ul>
