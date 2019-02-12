@@ -26,7 +26,9 @@ class NewTrip extends Component {
 			<div>
 				<div>NewTrip</div>
 				<form onSubmit={this.props.addTrip.bind(null, this.state)}>
-					<input type='text' name='name' onChange={this.handleChange} /><br/>
+					<input type='text' name='name' placeholder='City of Trip' onChange={this.handleChange} /><br/>
+					<input type='text' name='state' placeholder='State of Trip' onChange={this.handleChange} /><br/>
+					<input type='text' name='country' placeholder='Country of Trip' onChange={this.handleChange} /><br/>
 					<label>
 						Date of Arrival
 						<input type='date' name='dateArrived' onChange={this.handleChange} />

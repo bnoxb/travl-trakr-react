@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import MapContainer from '../MapContainer';
+// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 class TripPage extends Component {
 	constructor() {
@@ -23,6 +25,7 @@ class TripPage extends Component {
 				throw Error(response.statusText);
 			}
 			const parsedResponse = await response.json();
+			console.log(parsedResponse, ' PARSED RESPONSE');
 			this.setState({
 				yelps: parsedResponse.data.jsonBody.businesses
 			})
@@ -41,7 +44,6 @@ class TripPage extends Component {
 	}
 
 	render() {
-		// this.getYelp();
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
 				{yelp.name}
@@ -55,7 +57,7 @@ class TripPage extends Component {
 				<ul>
 					{yelpList}
 				</ul>
-
+				<MapContainer yelps={this.state.yelps}/>
 			</div>
 
 
