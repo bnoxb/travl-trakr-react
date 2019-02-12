@@ -50,7 +50,8 @@ class TripContainer extends Component {
 
 	newTrip = () => {
 		this.setState({
-			newTripScreen: true
+			newTripScreen: true,
+			showTripScreen: false
 		})
 	}
 

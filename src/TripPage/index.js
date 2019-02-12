@@ -12,12 +12,23 @@ class TripPage extends Component {
 			yelps: [],
 			lat: 0,
 			lng: 0,
-			loading: true
+			loading: true,
+			left: null,
+			arrived: null
 		}
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.getYelp();
+	}
+// This is needed to make sure the Calendar can load properly
+	checkForDate() {
+		if (this.props.currentTrip.dateArrived && this.props.currentTrip.dateArrived) {
+			this.setState({
+				left: new Date(`${this.props.currentTrip.dateLeft}`),
+				arrived: new Date(`${this.props.currentTrip.dateArrived}`)
+			})
+		}
 	}
 
 	getYelp = async () => {
@@ -42,19 +53,11 @@ class TripPage extends Component {
 	}
 
 	render() {
-		let calendar;
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
 				{i + 1} {yelp.name}
 			</li>
 		})
-		if(formattedDateArrived != 'Invalid Date' && formattedDateLeft != 'Invalid Date') {
-			calendar = <Calendar value={[formattedDateArrived, formattedDateLeft]} />
-		} else {
-			calendar = <br/>
-		}
-		const formattedDateArrived = new Date(`${this.props.currentTrip.dateArrived}`);
-		const formattedDateLeft = new Date(`${this.props.currentTrip.dateLeft}`);
 		return(
 			<div>
 				<h1>SHOW TRIP</h1>
@@ -62,7 +65,7 @@ class TripPage extends Component {
 				<p>{this.props.currentTrip.state}</p>
 				<p>{this.props.currentTrip.country}</p>
 				<p>{this.props.currentTrip.notes}</p>
-				{calendar}
+				<Calendar value={[this.state.arrived, this.state.left]} />
 				<ul>
 					{yelpList}
 				</ul>
