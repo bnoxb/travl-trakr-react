@@ -37,14 +37,11 @@ class TripContainer extends Component {
 
 			const parsedResponse = await tripCreateResponse.json();
 			this.setState({
-				trips: [...this.state.trips, parsedResponse.data],
+				trips: parsedResponse.data.user.trips,
 				newTripScreen: false
 			})
 
 			console.log(parsedResponse);
-
-
-
 
 		} catch(err) {
 			console.log(err);

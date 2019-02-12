@@ -1,33 +1,21 @@
-import React, { Component} from 'react';
+import React from 'react';
 
-class TripList extends Component {
-	constructor() {
-		super();
+const TripList = (props) => {
 
-		this.state = {
-
-		}
-	}
-
-	render() {
-		let tripList;
-		if(this.props.trips) {
-			tripList = this.props.trips.map((trip, i) => {
-				return <li key={trip._id}>
-						<span>{trip.name}</span><br/>
-						<small>{trip.country}</small><br/>
-						<button onClick={this.props.showTrip.bind(null, trip)}>Show</button>
-					</li>
-				});
-		} else {
-			tripList = null;
-		}
-		return(
+	const tripList = props.trips.map((trip, i) => {
+		return <li key={trip._id}>
+				{trip.name}<br/>
+				{trip.country}<br/>
+				<button onClick={props.showTrip.bind(null, trip)}>Show</button>
+			</li>
+	});
+	return(
+		<div>
 			<ul>
 				{tripList}
 			</ul>
-		)
-	}
+		</div>
+	)
 }
 
 

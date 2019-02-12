@@ -32,22 +32,21 @@ class UserPage extends Component {
 	}
 
 	render() {
-		let tripList;
-		if(this.state.user.trips) {
-			tripList = this.state.user.trips.map((trip, i) => {
-				return <li key={trip._id}>
-						<span>{trip.name}</span><br/>
-						<small>{trip.country}</small><br/>
-					</li>
-				});
-		} else {
-			tripList = null;
-		}
+		// let tripsList;
+		// if(this.state.user.trips) {
+		// 	tripsList = this.state.user.trips.map((trip, i) => {
+		// 		return <li key={trip._id}>
+		// 				<span>{trip.name}</span><br/>
+		// 				<small>{trip.country}</small><br/>
+		// 			</li>
+		// 		});
+		// } else {
+		// 	tripsList = null;
+		// }
 		
 		return (
 			<div>
 				{this.state.user.username}<br/>
-				{tripList}
 
 
 			</div>
