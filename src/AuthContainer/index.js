@@ -10,7 +10,8 @@ class AuthContainer extends Component {
 		this.state = {
 			loggedIn: false,
 			username: '',
-			_id: ''
+			_id: '',
+			registered: true
 		}
 	}
 
@@ -18,8 +19,15 @@ class AuthContainer extends Component {
 		this.setState({
 			loggedIn: true,
 			username: user.username,
-			_id: user._id
+			_id: user._id,
+			registered: true
 		});
+	}
+
+	showRegister = () => {
+		this.setState({
+			registered: false
+		})
 	}
 
 	render() {
@@ -29,10 +37,9 @@ class AuthContainer extends Component {
 				
 				{this.state.loggedIn ? 
 					<UserContainer history={this.props.history} username={this.state.username} _id={this.state._id} />
-					: <div>
-						<Login history={this.props.history} login={this.login}/>
-						<Register history={this.props.history} login={this.login}/>
-					</div>
+					: this.state.registered ? 
+						<Login history={this.props.history} login={this.login} showRegister={this.showRegister}/>
+						: <Register history={this.props.history} login={this.login}/>
 				}
 				
 			</div>

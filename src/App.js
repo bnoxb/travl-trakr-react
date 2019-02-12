@@ -1,8 +1,7 @@
 import React from 'react';
-import UserContainer from './UserContainer';
-import TripContainer from './TripContainer';
+// import UserContainer from './UserContainer';
+// import TripContainer from './TripContainer';
 import AuthContainer from './AuthContainer';
-// import AuthContainer from './AuthContainer';
 import logo from './logo.svg';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
