@@ -48,7 +48,8 @@ class TripPage extends Component {
 				{i + 1} {yelp.name}
 			</li>
 		})
-		const formattedDate = new Date(`${this.props.currentTrip.dateArrived}`);
+		const formattedDateArrived = new Date(`${this.props.currentTrip.dateArrived}`);
+		const formattedDateLeft = new Date(`${this.props.currentTrip.dateLeft}`);
 		return(
 			<div>
 				<h1>SHOW TRIP</h1>
@@ -56,7 +57,7 @@ class TripPage extends Component {
 				<p>{this.props.currentTrip.state}</p>
 				<p>{this.props.currentTrip.country}</p>
 				<p>{this.props.currentTrip.notes}</p>
-				<Calendar value={formattedDate} />
+				<Calendar value={[formattedDateArrived, formattedDateLeft]} />
 				<ul>
 					{yelpList}
 				</ul>
