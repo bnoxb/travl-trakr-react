@@ -67,7 +67,8 @@ class TripContainer extends Component {
 			console.log('ShowTrip triggered');
 			this.setState({
 				currentTrip: tripParsed.data,
-				showTripScreen: true
+				showTripScreen: true,
+				newTripScreen: false
 			})
 		} catch(err) {
 			console.log(err);
