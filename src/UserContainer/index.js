@@ -10,35 +10,14 @@ class UserContainer extends Component {
 		super();
 
 		this.state = {
-			loggedIn: false,
-			username: '',
-			_id: ''
 		}
-	}
-
-	login = (user) => {
-		this.setState({
-			loggedIn: true,
-			username: user.username,
-			_id: user._id
-		});
 	}
 
 	render() {
 		return (
 			<div>
-				
-				{this.state.loggedIn ? 
-					<div>
-						<UserPage history={this.props.history} username={this.state.username} _id={this.state._id} />
-						<TripContainer history={this.props.history} username={this.state.username} _id={this.state._id}/>
-					</div>
-					: <div>
-						<Login history={this.props.history} login={this.login}/>
-						<Register history={this.props.history} login={this.login}/>
-					</div>
-				}
-				
+				<UserPage history={this.props.history} username={this.props.username} _id={this.props._id} />
+				<TripContainer history={this.props.history} username={this.props.username} _id={this.props._id}/>
 			</div>
 		)
 	}

@@ -32,18 +32,6 @@ class UserPage extends Component {
 	}
 
 	render() {
-		// let tripsList;
-		// if(this.state.user.trips) {
-		// 	tripsList = this.state.user.trips.map((trip, i) => {
-		// 		return <li key={trip._id}>
-		// 				<span>{trip.name}</span><br/>
-		// 				<small>{trip.country}</small><br/>
-		// 			</li>
-		// 		});
-		// } else {
-		// 	tripsList = null;
-		// }
-		
 		return (
 			<div>
 				{this.state.user.username}<br/>

@@ -1,6 +1,7 @@
 import React from 'react';
 import UserContainer from './UserContainer';
 import TripContainer from './TripContainer';
+import AuthContainer from './AuthContainer';
 // import AuthContainer from './AuthContainer';
 import logo from './logo.svg';
 import { Route, Switch } from 'react-router-dom';
@@ -23,7 +24,7 @@ const App = () => {
 	return (
 		<main>
 			<Switch>
-				<Route exact path="/" component={ UserContainer }/>
+				<Route exact path="/" component={ AuthContainer }/>
 				<Route component={ My404 }/>
 			</Switch>
 		</main>
