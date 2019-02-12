@@ -36,13 +36,19 @@ class AuthContainer extends Component {
 		})
 	}
 
+	logout = () => {
+		this.setState({
+			loggedIn: false
+		})
+	}
+
 	render() {
 
 		return (
 			<div>
 				
 				{this.state.loggedIn ? 
-					<UserContainer history={this.props.history} username={this.state.username} _id={this.state._id} />
+					<UserContainer history={this.props.history} username={this.state.username} _id={this.state._id} logout={this.logout}/>
 					: this.state.registered ? 
 						<Login history={this.props.history} login={this.login} showRegister={this.showRegister}/>
 						: <Register history={this.props.history} login={this.login} showLogin={this.showLogin}/>
