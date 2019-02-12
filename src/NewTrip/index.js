@@ -31,7 +31,7 @@ class NewTrip extends Component {
 					<input type='text' name='country' placeholder='Country of Trip' onChange={this.handleChange} /><br/>
 					<label>
 						Date of Arrival
-						<input type='date' name='dateArrived' onChange={this.handleChange} />
+						<input type='datetime-local' name='dateArrived' onChange={this.handleChange} />
 					</label><br/>
 					<label>
 						Date of Left

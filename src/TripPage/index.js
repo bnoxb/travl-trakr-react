@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MapContainer from '../MapContainer';
+import Calendar from 'react-calendar';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 class TripPage extends Component {
@@ -41,17 +42,21 @@ class TripPage extends Component {
 	}
 
 	render() {
+		console.log(this.props.currentTrip.dateArrived);
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
 				{i + 1} {yelp.name}
 			</li>
 		})
+		const formattedDate = new Date(`${this.props.currentTrip.dateArrived}`);
 		return(
 			<div>
 				<h1>SHOW TRIP</h1>
 				<h3>{this.props.currentTrip.name}</h3>
 				<p>{this.props.currentTrip.state}</p>
 				<p>{this.props.currentTrip.country}</p>
+				<p>{this.props.currentTrip.notes}</p>
+				<Calendar value={formattedDate} />
 				<ul>
 					{yelpList}
 				</ul>
