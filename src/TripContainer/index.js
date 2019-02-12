@@ -63,6 +63,7 @@ class TripContainer extends Component {
 				throw Error(response.statusText);
 			}
 			const tripParsed = await response.json();
+			console.log('ShowTrip triggered');
 			this.setState({
 				currentTrip: tripParsed.data,
 				showTripScreen: true
@@ -71,6 +72,12 @@ class TripContainer extends Component {
 			console.log(err);
 			return err;
 		}
+	}
+
+	hideTrip = () => {
+		this.setState({
+			showTripScreen: false
+		})
 	}
 
 	getTrips = async () => {
@@ -95,8 +102,7 @@ class TripContainer extends Component {
 		return(
 			<div>
 				{this.state.newTripScreen ? <NewTrip history={this.props.history} addTrip={this.addTrip} /> : <button onClick={this.newTrip}>Make a NewTrip</button>}
-				<TripList trips={this.state.trips} showTrip={this.showTrip} />
-				{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip}/> : null}
+				{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip}/> : <TripList trips={this.state.trips} showTrip={this.showTrip} />}
 			</div>
 
 		)

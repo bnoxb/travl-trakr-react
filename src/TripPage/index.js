@@ -5,19 +5,17 @@ class TripPage extends Component {
 		super();
 
 		this.state = {
-			trip: {}
-
+			trip: {},
+			yelps: []
 		}
 	}
 
-	componentDidMount() {
+	componentDidMount(){
 		this.getYelp();
-		// this.getGoogleMap();
 	}
 
 	getYelp = async () => {
 		try {
-			console.log(this.props.currentTrip, ' currentRtip');
 			const response = await fetch(`http://localhost:9000/trips/yelp/${this.props.currentTrip._id}`, {
 				credentials: 'include'
 			});
@@ -25,7 +23,9 @@ class TripPage extends Component {
 				throw Error(response.statusText);
 			}
 			const parsedResponse = await response.json();
-			console.log(parsedResponse);
+			this.setState({
+				yelps: parsedResponse.data.jsonBody.businesses
+			})
 		} catch(err) {
 			console.log(err);
 			return err;
@@ -41,11 +41,20 @@ class TripPage extends Component {
 	}
 
 	render() {
-
+		// this.getYelp();
+		const yelpList = this.state.yelps.map((yelp, i) => {
+			return <li key={i}>
+				{yelp.name}
+			</li>
+		})
 		return(
 			<div>
 				<h1>SHOW TRIP</h1>
 				<h3>{this.props.currentTrip.name}</h3>
+				<button onClick={this.props.hideTrip}>Back to List</button>
+				<ul>
+					{yelpList}
+				</ul>
 
 			</div>
 
