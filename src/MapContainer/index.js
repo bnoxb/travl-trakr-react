@@ -4,14 +4,13 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const style = {
 	width: '100%',
-	height: '50%'
+	height: '100%'
 }
 
 
 export class MapContainer extends Component {
 
 	render() {
-		console.log(this.props.lat);
 		const yelpsList = this.props.yelps.map((yelp, i) => {
 			let iconUrl;
 			return <Marker 

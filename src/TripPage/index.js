@@ -28,7 +28,6 @@ class TripPage extends Component {
 				throw Error(response.statusText);
 			}
 			const parsedResponse = await response.json();
-			console.log(parsedResponse, ' PARSED RESPONSE');
 			this.setState({
 				yelps: parsedResponse.data.jsonBody.businesses,
 				lat: parsedResponse.data.jsonBody.region.center.latitude,
@@ -51,10 +50,15 @@ class TripPage extends Component {
 			<div>
 				<h1>SHOW TRIP</h1>
 				<h3>{this.props.currentTrip.name}</h3>
+				<p>{this.props.currentTrip.state}</p>
+				<p>{this.props.currentTrip.country}</p>
 				<ul>
 					{yelpList}
 				</ul>
 				<button onClick={this.props.hideTrip}>Back to List</button>
+			
+				<button onClick={this.props.deleteTrip}>DELETE THIS TRIP</button>
+		
 				{this.state.loading ? null : <MapContainer yelps={this.state.yelps} lat={this.state.lat} lng={this.state.lng}/>}
 
 			</div>

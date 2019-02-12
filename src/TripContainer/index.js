@@ -98,11 +98,29 @@ class TripContainer extends Component {
 		}
 	}
 
+	deleteTrip = async (e) => {
+		e.preventDefault();
+		console.log(this.state.currentTrip._id);
+		try {
+			const response = await fetch(`http://localhost:9000/trips/${this.state.currentTrip._id}`, {
+				method: 'DELETE',
+				credentials: 'include'
+			});
+			this.setState({
+				trips: this.state.trips.filter(trip => trip._id !== this.state.currentTrip._id),
+				showTripScreen: false
+
+			})
+		} catch(err) {
+			console.log(err);
+		}
+	}
+
 	render() {
 		return(
 			<div>
 				{this.state.newTripScreen ? <NewTrip history={this.props.history} addTrip={this.addTrip} /> : <button onClick={this.newTrip}>Make a NewTrip</button>}
-				{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip}/> : <TripList trips={this.state.trips} showTrip={this.showTrip} />}
+				{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} /> : <TripList trips={this.state.trips} showTrip={this.showTrip} />}
 			</div>
 
 		)
