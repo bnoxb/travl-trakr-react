@@ -41,6 +41,7 @@ class TripPage extends Component {
 				throw Error(response.statusText);
 			}
 			const parsedResponse = await response.json();
+			console.log(parsedResponse);
 			this.setState({
 				yelps: parsedResponse.data.jsonBody.businesses,
 				lat: parsedResponse.data.jsonBody.region.center.latitude,
@@ -61,18 +62,16 @@ class TripPage extends Component {
 		})
 		return(
 			<div>
-				<h1>SHOW TRIP</h1>
-				<h3>{this.props.currentTrip.name}</h3>
-				<p>{this.props.currentTrip.state}</p>
-				<p>{this.props.currentTrip.country}</p>
+				<button onClick={this.props.hideTrip}>Back to List</button>
+				<button onClick={this.props.showEditTrip.bind(null, this.props.currentTrip)}>EDIT</button>
+				<button onClick={this.props.addNote.bind(null, this.props.currentTrip)}>Add Note</button>
+				<button onClick={this.props.deleteTrip}>DELETE THIS TRIP</button>
+				<h3>{this.props.currentTrip.name} {this.props.currentTrip.state} {this.props.currentTrip.country}</h3>
 				<p>{this.props.currentTrip.notes}</p>
 				<Calendar value={[this.state.arrived, this.state.left]} />
 				<ul>
 					{yelpList}
 				</ul>
-				<button onClick={this.props.hideTrip}>Back to List</button>
-				<button onClick={this.props.showEditTrip.bind(null, this.props.currentTrip)}>EDIT</button>
-				<button onClick={this.props.deleteTrip}>DELETE THIS TRIP</button>
 		
 				{this.state.loading ? null : <MapContainer yelps={this.state.yelps} lat={this.state.lat} lng={this.state.lng}/>}
 
