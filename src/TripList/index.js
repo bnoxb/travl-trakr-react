@@ -5,13 +5,14 @@ const TripList = (props) => {
 	const tripList = props.trips.map((trip, i) => {
 		return <li key={trip._id}>
 				{trip.name} {trip.state}<br/>
-				{trip.country}
-				<button onClick={props.showTrip.bind(null, trip)}>Show</button>
+				{trip.country}<br/>
+				<button onClick={props.showTrip.bind(null, trip)}>Show</button><br/>
 			</li>
 	});
 	return(
 		<div>
-			<ul>
+			<h3>Your Trips</h3>
+			<ul id="trip-list">
 				{tripList}
 			</ul>
 		</div>

@@ -83,7 +83,7 @@ class UserContainer extends Component {
 
 	render() {
 		return (
-			<div>
+			<div id="user-container">
 				{this.state.showUserEdit ? <EditUser userToEdit={this.state.userToEdit} handleEditFormInput={this.handleEditFormInput} handleUserEditSubmit={this.handleUserEditSubmit} /> : <UserPage history={this.props.history} username={this.props.username} _id={this.props._id} deleteUser={this.deleteUser} showEditUser={this.showEditUser}/>}
 				<TripContainer history={this.props.history} username={this.props.username} _id={this.props._id}/>
 			</div>

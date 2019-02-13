@@ -31,18 +31,66 @@
   }
 }
 */
+
 body {
   font-family: 'Righteous', cursive;
 }
 
 button {
   font-family: 'Righteous', cursive;
+  box-shadow: 1px 1px 2px black;
 }
 
 li {
   list-style: none;
+  margin: 10px 0;
+}
+
+ul {
+  columns: 3;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+.react-calendar {
+  margin: 0 auto;
+}
+
+#user-container {
+  height: 100vh;
+  width: 100%;
+}
+
+#user-page {
+  background-color: teal;
+  height: 15%;
+  padding-bottom: 20px;
 }
 
 #user-name {
+  text-align: center;
+}
+
+#user-page-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+#user-page-buttons > button {
+  width: 150px;
+  height: 40px;
+  font-size: 20px;
+}
+
+#trip-container {
+  background-color: lightgreen;
+  height: 85%;
+}
+
+#trip-list > li {
   text-align: center;
 }
