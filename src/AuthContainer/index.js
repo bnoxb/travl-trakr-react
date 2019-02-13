@@ -1,3 +1,5 @@
+// Gets put in App.js
+
 import React, { Component } from 'react';
 import Login from '../Login';
 import Register from '../Register';
@@ -6,7 +8,7 @@ import UserContainer from '../UserContainer';
 class AuthContainer extends Component {
 	constructor() {
 		super();
-
+// Keeps track of the current user
 		this.state = {
 			loggedIn: false,
 			username: '',
@@ -49,7 +51,7 @@ class AuthContainer extends Component {
 	}
 
 	render() {
-
+// This has a switch for if a person is logged in, it'll show the main part of the app, but if they aren't, it accesses a switch to show either register or login page
 		return (
 			<div>
 				

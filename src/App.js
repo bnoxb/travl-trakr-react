@@ -1,6 +1,4 @@
 import React from 'react';
-// import UserContainer from './UserContainer';
-// import TripContainer from './TripContainer';
 import AuthContainer from './AuthContainer';
 import logo from './logo.svg';
 import { Route, Switch } from 'react-router-dom';
@@ -18,7 +16,8 @@ const My404 = () => {
 }
 
 
-
+// Has react router ready for expansion
+// Auth Container holds everything
 const App = () => {
 	return (
 		<main>

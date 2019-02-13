@@ -1,6 +1,6 @@
+// called by the AuthContainer when a user logs in
+
 import React, { Component } from 'react';
-// import Login from '../Login';
-// import Register from '../Register';
 import UserPage from '../UserPage';
 import TripContainer from '../TripContainer';
 import EditUser from '../EditUser';

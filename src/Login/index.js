@@ -1,10 +1,12 @@
+// Comes from the authContainer
+
 import React, { Component } from 'react';
 
 class Login extends Component {
 	constructor() {
 		super();
 
-
+// Captures the users typing for the login process
 		this.state = {
 			username: '',
 			password: ''
@@ -16,7 +18,7 @@ class Login extends Component {
 			[e.target.name]: e.target.value
 		})
 	}
-
+// Sends the post request to login the user, response triggers login so that we now will see the main page
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
