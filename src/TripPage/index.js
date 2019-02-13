@@ -34,7 +34,7 @@ class TripPage extends Component {
 
 	getYelp = async () => {
 		try {
-			const response = await fetch(`http://localhost:9000/trips/yelp/${this.props.currentTrip._id}`, {
+			const response = await fetch(`http://localhost:9000/api/v1/trips/yelp/${this.props.currentTrip._id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){

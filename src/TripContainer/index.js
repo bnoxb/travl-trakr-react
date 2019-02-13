@@ -39,7 +39,7 @@ class TripContainer extends Component {
 		e.preventDefault();
 		trip.notes = [trip.notes];
 		try {
-			const tripCreateResponse = await fetch('http://localhost:9000/trips/', {
+			const tripCreateResponse = await fetch('http://localhost:9000/api/v1/trips/', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(trip),
@@ -75,7 +75,7 @@ class TripContainer extends Component {
 
 	showTrip = async (trip, e) => {
 		try {
-			const response = await fetch(`http://localhost:9000/trips/${trip._id}`, {
+			const response = await fetch(`http://localhost:9000/api/v1/trips/${trip._id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
@@ -147,7 +147,7 @@ class TripContainer extends Component {
 	handleTripEditSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:9000/trips/${this.state.tripToEdit._id}`, {
+			const response = await fetch(`http://localhost:9000/api/v1/trips/${this.state.tripToEdit._id}`, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.tripToEdit),
@@ -196,7 +196,7 @@ class TripContainer extends Component {
 	handleAddNote = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:9000/trips/${this.state.tripToEdit._id}/addNote`, {
+			const response = await fetch(`http://localhost:9000/api/v1/trips/${this.state.tripToEdit._id}/addNote`, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.noteToAdd),
@@ -231,7 +231,7 @@ class TripContainer extends Component {
 		e.preventDefault();
 		console.log(this.state.currentTrip._id);
 		try {
-			const response = await fetch(`http://localhost:9000/trips/${this.state.currentTrip._id}`, {
+			const response = await fetch(`http://localhost:9000/api/v1/trips/${this.state.currentTrip._id}`, {
 				method: 'DELETE',
 				credentials: 'include'
 			});

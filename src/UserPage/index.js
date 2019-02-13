@@ -33,7 +33,7 @@ class UserPage extends Component {
 
 	logOut = async () => {
 		try {
-			const response = await fetch('http://localhost:9000/auth/logout', {
+			const response = await fetch('http://localhost:9000/api/v1/auth/logout', {
 				credentials: 'include'
 			});
 			localStorage.clear();
