@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NewTrip from '../NewTrip';
 import TripPage from '../TripPage';
 import TripList from '../TripList';
+import EditTrip from '../EditTrip';
 
 
 class TripContainer extends Component {
@@ -11,7 +12,17 @@ class TripContainer extends Component {
 			trips: [],
 			newTripScreen: false,
 			currentTrip: {},
-			showTripScreen: false
+			showTripScreen: false,
+			showTripEdit: false,
+			tripToEdit: {
+				name: '',
+				state: '',
+				country: '',
+				dateArrived: '',
+				dateLeft: '',
+				notes: [],
+				_id: null
+			}
 		}
 	}
 
@@ -100,6 +111,64 @@ class TripContainer extends Component {
 		}
 	}
 
+	showEditTrip = (trip, e) => {
+		console.log(trip.dateArrived);
+		this.setState({
+			showTripEdit: true,
+			showTripScreen: false,
+			tripToEdit: {
+				name: trip.name,
+				state: trip.state,
+				country: trip.country,
+				dateArrived: trip.dateArrived,
+				dateLeft: trip.dateLeft,
+				notes: trip.notes,
+				_id: trip._id
+			}
+		})
+	}
+
+	handleTripEditSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await fetch(`http://localhost:9000/trips/${this.state.tripToEdit._id}`, {
+				method: 'PUT',
+				credentials: 'include',
+				body: JSON.stringify(this.state.tripToEdit),
+				headers:{
+					'Content-Type': 'application/json'
+				}
+			});
+			if(!response.ok){
+				throw Error(response.statusText);
+			}
+			const parsedResponse = await response.json();
+			const mappedTrips = this.state.trips.map((trip) => {
+				if(trip._id === this.state.tripToEdit._id) {
+					return parsedResponse.data;
+				} else {
+					return trip;
+				}
+			});
+			console.log(mappedTrips);
+			this.setState({
+				trips: mappedTrips,
+				showTripEdit: false
+			});
+		} catch(err) {
+			console.log(err);
+		}
+	}
+
+	handleEditFormInput = (e) => {
+		this.setState({
+			tripToEdit: {
+				...this.state.tripToEdit,
+				[e.target.name]: e.target.value
+			}
+		})
+	}
+
 	deleteTrip = async (e) => {
 		e.preventDefault();
 		console.log(this.state.currentTrip._id);
@@ -122,7 +191,7 @@ class TripContainer extends Component {
 		return(
 			<div>
 				{this.state.newTripScreen ? <NewTrip history={this.props.history} addTrip={this.addTrip} /> : <button onClick={this.newTrip}>Make a NewTrip</button>}
-				{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} /> : <TripList trips={this.state.trips} showTrip={this.showTrip} />}
+				{this.state.showTripEdit ? <EditTrip handleEditFormInput={this.handleEditFormInput} tripToEdit={this.state.tripToEdit} handleTripEditSubmit={this.handleTripEditSubmit}/> : <div>{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} showEditTrip={this.showEditTrip}/> : <TripList trips={this.state.trips} showTrip={this.showTrip} />}</div>}
 			</div>
 
 		)

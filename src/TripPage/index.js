@@ -20,6 +20,7 @@ class TripPage extends Component {
 
 	componentDidMount() {
 		this.getYelp();
+		this.checkForDate();
 	}
 // This is needed to make sure the Calendar can load properly
 	checkForDate() {
@@ -70,7 +71,7 @@ class TripPage extends Component {
 					{yelpList}
 				</ul>
 				<button onClick={this.props.hideTrip}>Back to List</button>
-			
+				<button onClick={this.props.showEditTrip.bind(null, this.props.currentTrip)}>EDIT</button>
 				<button onClick={this.props.deleteTrip}>DELETE THIS TRIP</button>
 		
 				{this.state.loading ? null : <MapContainer yelps={this.state.yelps} lat={this.state.lat} lng={this.state.lng}/>}
