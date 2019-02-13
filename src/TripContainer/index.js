@@ -138,7 +138,6 @@ class TripContainer extends Component {
 	addNote = (trip, e) => {
 		this.setState({
 			showNoteAdd: true,
-			showTripScreen: false,
 			tripToEdit: {
 				_id: trip._id
 			}
@@ -221,7 +220,6 @@ class TripContainer extends Component {
 			this.setState({
 				trips: mappedTrips,
 				showNoteAdd: false,
-				showTripScreen: true,
 				currentTrip: parsedResponse.data
 			});
 		} catch(err) {

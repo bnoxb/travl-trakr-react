@@ -36,6 +36,7 @@ class UserPage extends Component {
 			<div>
 				{this.state.user.username}<br/>
 				<button onClick={this.props.deleteUser}>DELETE USER</button>
+				<button onClick={this.props.showEditUser.bind(null, this.state.user)}>Edit User</button>
 
 
 			</div>

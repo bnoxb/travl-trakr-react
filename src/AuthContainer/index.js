@@ -42,6 +42,12 @@ class AuthContainer extends Component {
 		})
 	}
 
+	edit = (user) => {
+		this.setState({
+			username: user.username
+		})
+	}
+
 	render() {
 
 		return (
