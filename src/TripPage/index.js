@@ -57,7 +57,12 @@ class TripPage extends Component {
 	render() {
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
-				{i + 1} {yelp.name}
+				{i + 1} {yelp.categories[0].title} at {yelp.name}
+			</li>
+		})
+		const noteList = this.props.currentTrip.notes.map((note, i) => {
+			return <li key={i}>
+				{note}
 			</li>
 		})
 		return(
@@ -67,8 +72,11 @@ class TripPage extends Component {
 				<button onClick={this.props.addNote.bind(null, this.props.currentTrip)}>Add Note</button>
 				<button onClick={this.props.deleteTrip}>DELETE THIS TRIP</button>
 				<h3>{this.props.currentTrip.name} {this.props.currentTrip.state} {this.props.currentTrip.country}</h3>
-				<p>{this.props.currentTrip.notes}</p>
+				<ul>
+					{noteList}
+				</ul>
 				<Calendar value={[this.state.arrived, this.state.left]} />
+				<h4>What is Hot and New?</h4>
 				<ul>
 					{yelpList}
 				</ul>

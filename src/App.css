@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -29,4 +29,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/
+body {
+  font-family: 'Righteous', cursive;
+}
+
+button {
+  font-family: 'Righteous', cursive;
+}
+
+li {
+  list-style: none;
+}
+
+#user-name {
+  text-align: center;
 }
