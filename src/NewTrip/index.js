@@ -23,8 +23,8 @@ class NewTrip extends Component {
 
 	render() {
 		return (
-			<div>
-				<div>NewTrip</div>
+			<div id='new-trip-page'>
+				<div>NewTrip</div><br/>
 				<form onSubmit={this.props.addTrip.bind(null, this.state)}>
 					<input type='text' name='name' placeholder='City of Trip' onChange={this.handleChange} /><br/>
 					<input type='text' name='state' placeholder='State of Trip' onChange={this.handleChange} /><br/>
@@ -34,7 +34,7 @@ class NewTrip extends Component {
 						<input type='datetime-local' name='dateArrived' onChange={this.handleChange} />
 					</label><br/>
 					<label>
-						Date of Left
+						Date Left
 						<input type='datetime-local' name='dateLeft' onChange={this.handleChange} />
 					</label><br/>
 					<label>Some notes about your trip:</label><br/>

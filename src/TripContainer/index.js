@@ -248,9 +248,32 @@ class TripContainer extends Component {
 	render() {
 		return(
 			<div id="trip-container">
-				{this.state.newTripScreen ? <NewTrip history={this.props.history} addTrip={this.addTrip} /> : <button onClick={this.newTrip}>Make a NewTrip</button>}
-				{this.state.showNoteAdd ? <AddNote handleAddNote={this.handleAddNote} handleNoteChange={this.handleNoteChange}/> : null}
-				{this.state.showTripEdit ? <EditTrip handleEditFormInput={this.handleEditFormInput} tripToEdit={this.state.tripToEdit} handleTripEditSubmit={this.handleTripEditSubmit}/> : <div>{this.state.showTripScreen ? <TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} showEditTrip={this.showEditTrip} addNote={this.addNote}/> : <TripList trips={this.state.trips} showTrip={this.showTrip} />}</div>}
+				{this.state.newTripScreen ? 
+					<NewTrip history={this.props.history} addTrip={this.addTrip} /> : 
+					<button onClick={this.newTrip}>Make a NewTrip</button>
+				}
+				{this.state.showNoteAdd ? 
+					<AddNote handleAddNote={this.handleAddNote} handleNoteChange={this.handleNoteChange}/> : 
+					null
+				}
+				{this.state.showTripScreen ? 
+					<div>
+						<button onClick={this.hideTrip}>Back to List</button>
+						<button onClick={this.showEditTrip.bind(null, this.state.currentTrip)}>EDIT</button>
+						<button onClick={this.addNote.bind(null, this.state.currentTrip)}>Add Note</button>
+						<button onClick={this.deleteTrip}>DELETE THIS TRIP</button>
+					</div> :
+					null
+				}
+				{this.state.showTripEdit ? 
+					<EditTrip handleEditFormInput={this.handleEditFormInput} tripToEdit={this.state.tripToEdit} handleTripEditSubmit={this.handleTripEditSubmit}/> : 
+					<div>
+						{this.state.showTripScreen ? 
+							<TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} showEditTrip={this.showEditTrip} addNote={this.addNote}/> : 
+							<TripList trips={this.state.trips} showTrip={this.showTrip} />
+						}
+					</div>
+				}
 			</div>
 
 		)

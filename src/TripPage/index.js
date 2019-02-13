@@ -69,10 +69,6 @@ class TripPage extends Component {
 		})
 		return(
 			<div>
-				<button onClick={this.props.hideTrip}>Back to List</button>
-				<button onClick={this.props.showEditTrip.bind(null, this.props.currentTrip)}>EDIT</button>
-				<button onClick={this.props.addNote.bind(null, this.props.currentTrip)}>Add Note</button>
-				<button onClick={this.props.deleteTrip}>DELETE THIS TRIP</button>
 				<h3>{this.props.currentTrip.name} {this.props.currentTrip.state} {this.props.currentTrip.country}</h3>
 				<ul>
 					{noteList}
