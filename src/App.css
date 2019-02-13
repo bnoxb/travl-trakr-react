@@ -135,7 +135,6 @@ textarea {
   justify-content: center;
   background-color: teal;
   height: 10%;
-  padding-bottom: 20px;
   align-items: center;
   overflow: scroll;
 }
@@ -143,12 +142,14 @@ textarea {
 #user-name {
   text-align: center;
   width: 50%;
+  margin-bottom: 0;
+  font-size: 40px;
 }
 
 #user-page-buttons {
+  width: 50%;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 10px;
 }
 
 #user-page-buttons > button {
@@ -163,14 +164,30 @@ textarea {
   overflow: scroll;
 }
 
+#your-trips {
+  font-size: 48px;
+  text-shadow: center;
+}
+
 #trip-list {
-  display: flex;
-  justify-content: space-around;
+  columns: 3;
+  padding: 0;
 }
 
 #trip-list > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  width: 25%;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 30px
+}
+
+#trip-list >li > button {
+  width: 50%;
+  height: 20%;
+  font-size: 20px;
 }
 
 #map-container {

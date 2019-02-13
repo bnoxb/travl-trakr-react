@@ -69,7 +69,7 @@ class TripPage extends Component {
 		})
 		return(
 			<div>
-				<h3>{this.props.currentTrip.name} {this.props.currentTrip.state} {this.props.currentTrip.country}</h3>
+				<h3>{this.props.currentTrip.name} {this.props.currentTrip.state}<br/>{this.props.currentTrip.country}</h3>
 				<ul>
 					{noteList}
 				</ul>

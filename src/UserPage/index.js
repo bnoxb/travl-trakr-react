@@ -37,8 +37,8 @@ class UserPage extends Component {
 				<h1 id="user-name">{this.state.user.username}</h1>
 				<div id="user-page-buttons">
 					<button onClick={this.props.logout}>Log Out</button>
-					<button onClick={this.props.deleteUser}>DELETE USER</button>
 					<button onClick={this.props.showEditUser.bind(null, this.state.user)}>Edit User</button>
+					<button onClick={this.props.deleteUser}>Delete User</button>
 				</div>
 			</div>
 		)

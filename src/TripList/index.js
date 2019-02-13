@@ -11,8 +11,8 @@ const TripList = (props) => {
 	});
 	return(
 		<div>
-			<h3>Your Trips</h3>
-			<ul id="trip-list">
+			<h3 id='your-trips'>Your Trips</h3>
+			<ul id='trip-list'>
 				{tripList}
 			</ul>
 		</div>

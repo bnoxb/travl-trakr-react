@@ -259,9 +259,9 @@ class TripContainer extends Component {
 				{this.state.showTripScreen ? 
 					<div>
 						<button onClick={this.hideTrip}>Back to List</button>
-						<button onClick={this.showEditTrip.bind(null, this.state.currentTrip)}>EDIT</button>
-						<button onClick={this.addNote.bind(null, this.state.currentTrip)}>Add Note</button>
-						<button onClick={this.deleteTrip}>DELETE THIS TRIP</button>
+						<button onClick={this.addNote.bind(null, this.state.currentTrip)}>Add Note</button>						
+						<button onClick={this.showEditTrip.bind(null, this.state.currentTrip)}>Edit This Trip</button>
+						<button onClick={this.deleteTrip}>Delete This Trip</button>
 					</div> :
 					null
 				}
