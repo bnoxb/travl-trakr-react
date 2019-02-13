@@ -24,7 +24,7 @@ export class MapContainer extends Component {
 					/>
 		});
 		return (
-			<div id="map">
+			<div id="map" style={{width: '100%', height: '50vh', position: 'relative', 'margin-left': 'auto', display: 'flex', 'flex-direction': 'column'}}>
 				<Map
 					google={this.props.google}
 					style={style}

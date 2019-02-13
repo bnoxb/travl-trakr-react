@@ -57,7 +57,7 @@ class TripPage extends Component {
 	render() {
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
-				{i + 1} {yelp.categories[0].title} at {yelp.name}
+				{i + 1}: {yelp.categories[0].title} at {yelp.name}
 			</li>
 		})
 		const noteList = this.props.currentTrip.notes.map((note, i) => {
@@ -77,13 +77,22 @@ class TripPage extends Component {
 				<ul>
 					{noteList}
 				</ul>
-				<Calendar value={[this.state.arrived, this.state.left]} />
+				<div id='map-and-calendar'>
+					<Calendar value={[this.state.arrived, this.state.left]} />
+					{this.state.loading ? 
+						null : 
+						<div id='map-container'>
+							<MapContainer yelps={this.state.yelps} lat={this.state.lat} lng={this.state.lng}/>
+						</div>
+					}
+				</div>
+
 				<h4>What is Hot and New?</h4>
 				<ul>
 					{yelpList}
 				</ul>
 		
-				{this.state.loading ? null : <MapContainer yelps={this.state.yelps} lat={this.state.lat} lng={this.state.lng}/>}
+
 
 			</div>
 

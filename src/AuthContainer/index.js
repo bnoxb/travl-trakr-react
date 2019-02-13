@@ -38,10 +38,20 @@ class AuthContainer extends Component {
 		})
 	}
 
-	logout = () => {
-		this.setState({
-			loggedIn: false
-		})
+	logout = async () => {
+		try {
+			const response = await fetch('http://localhost:9000/api/v1/auth/logout', {
+				credentials: 'include'
+			});
+			this.setState({
+				loggedIn: false,
+				username: '',
+				_id: '',
+				registered: true
+			});
+		} catch(err) {
+			console.log(err);
+		}
 	}
 
 	edit = (user) => {
@@ -56,7 +66,7 @@ class AuthContainer extends Component {
 			<div>
 				
 				{this.state.loggedIn ? 
-					<UserContainer history={this.props.history} username={this.state.username} _id={this.state._id} logout={this.logout}/>
+					<UserContainer logout={this.logout} history={this.props.history} username={this.state.username} _id={this.state._id} logout={this.logout}/>
 					: this.state.registered ? 
 						<Login history={this.props.history} login={this.login} showRegister={this.showRegister}/>
 						: <Register history={this.props.history} login={this.login} showLogin={this.showLogin}/>

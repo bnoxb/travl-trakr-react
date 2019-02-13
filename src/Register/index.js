@@ -47,14 +47,17 @@ class Register extends Component {
 
 	render() {
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
-					<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />
-					<input type='text' name='email' onChange={this.handleChange} placeholder='Enter Email' />
-					<input type='password' name='password' onChange={this.handleChange} placeholder='Enter Password' />
-					<button>Login</button>
-				</form>
-				<button onClick={this.props.showLogin}>Already Registered?</button>
+			<div id='register'>
+				<h1>Register With TravlTrakr</h1>
+				<div id='register-interactives'>
+					<form onSubmit={this.handleSubmit}>
+						<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />
+						<input type='text' name='email' onChange={this.handleChange} placeholder='Enter Email' />
+						<input type='password' name='password' onChange={this.handleChange} placeholder='Enter Password' />
+						<button>Register</button>
+					</form>
+					<button onClick={this.props.showLogin}>Already Registered?</button>
+				</div>
 			</div>
 		)
 	}
