@@ -8,7 +8,7 @@ const AddNote = (props) => {
 				<div>Add Note</div>
 				<form onSubmit={props.handleAddNote}>
 					<label>Add notes about your trip:</label><br/>
-						<textarea name='notes' rows='8' columns='100' onChange={props.handleNoteChange}></textarea>
+						<textarea name='notes' onChange={props.handleNoteChange}></textarea>
 					<button>Add Notes</button>
 
 				</form>

@@ -4,7 +4,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const style = {
 	width: '100%',
-	height: '80%'
+	height: '100%'
 }
 
 
@@ -20,24 +20,24 @@ export class MapContainer extends Component {
 						}}
 						icon={{
 							url: `mapicons/number_${i + 1}.png`
-							// scaledSize: {width: 20, height: 20}
 						}}
 					/>
 		});
 		return (
+			<div id="map">
+				<Map
+					google={this.props.google}
+					style={style}
+					zoom={10}
+					initialCenter={{
+						lat: this.props.lat,
+						lng: this.props.lng
+					}}
+					>
 
-			<Map
-				google={this.props.google}
-				style={style}
-				zoom={10}
-				initialCenter={{
-					lat: this.props.lat,
-					lng: this.props.lng
-				}}
-				>
-
-				{yelpsList}
-			</Map>
+					{yelpsList}
+				</Map>
+			</div>
 		)
 	}
 }

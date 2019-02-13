@@ -61,9 +61,11 @@ class TripPage extends Component {
 			</li>
 		})
 		const noteList = this.props.currentTrip.notes.map((note, i) => {
-			return <li key={i}>
-				{note}
-			</li>
+			if(note) {
+				return <li key={i}>
+					>{note}
+				</li>
+			}
 		})
 		return(
 			<div>

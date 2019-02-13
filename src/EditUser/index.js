@@ -4,7 +4,7 @@ import React from 'react';
 const EditUser = (props) => {
 
 	return (
-			<div>
+			<div className="user-page">
 				<div>Edit User</div>
 				<form onSubmit={props.handleUserEditSubmit}>
 					<input type='text' name='username' onChange={props.handleEditFormInput} value={props.userToEdit.username}/><br/>

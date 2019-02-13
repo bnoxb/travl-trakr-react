@@ -45,7 +45,7 @@ class UserPage extends Component {
 
 	render() {
 		return (
-			<div id="user-page">
+			<div className="user-page">
 				<h1 id="user-name">{this.state.user.username}</h1>
 				<div id="user-page-buttons">
 					<button onClick={this.logOut}>Log Out</button>
