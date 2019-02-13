@@ -38,7 +38,7 @@ class NewTrip extends Component {
 						<input type='datetime-local' name='dateLeft' onChange={this.handleChange} />
 					</label><br/>
 					<label>Some notes about your trip:</label><br/>
-					<textarea name='notes' rows='8' columns='50'></textarea>
+					<textarea name='notes' rows='8' columns='100' onChange={this.handleChange}></textarea>
 					<button>Make your trip</button>
 
 				</form>

@@ -32,6 +32,7 @@ class TripContainer extends Component {
 
 	addTrip = async (trip, e) => {
 		e.preventDefault();
+		trip.notes = [trip.notes];
 		try {
 			const tripCreateResponse = await fetch('http://localhost:9000/trips/', {
 				method: 'POST',
@@ -47,6 +48,7 @@ class TripContainer extends Component {
 			}
 
 			const parsedResponse = await tripCreateResponse.json();
+			console.log(parsedResponse);
 			this.setState({
 				trips: parsedResponse.data.user.trips,
 				newTripScreen: false
