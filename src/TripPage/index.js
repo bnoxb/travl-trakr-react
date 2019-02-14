@@ -24,10 +24,23 @@ class TripPage extends Component {
 	}
 // This is needed to make sure the Calendar can load properly
 	checkForDate() {
-		if (this.props.currentTrip.dateArrived && this.props.currentTrip.dateArrived) {
+		if(this.props.currentTrip.dateLeft && this.props.currentTrip.dateArrived) {
+			console.log('HERE');
 			this.setState({
 				left: new Date(`${this.props.currentTrip.dateLeft}`),
 				arrived: new Date(`${this.props.currentTrip.dateArrived}`)
+			})
+		} else if (this.props.currentTrip.dateLeft || this.props.currentTrip.dateArrived) {
+			console.log('THERE');
+			const leftCheck = this.props.currentTrip.dateLeft === null ? 
+				new Date(`${this.props.currentTrip.dateArrived}`) : 
+				new Date(`${this.props.currentTrip.dateLeft}`);
+			const arrivedCheck = this.props.currentTrip.dateArrived === null ? 
+				new Date(`${this.props.currentTrip.dateLeft}`) : 
+				new Date(`${this.props.currentTrip.dateArrived}`);
+			this.setState({
+				left: leftCheck,
+				arrived: arrivedCheck
 			})
 		}
 	}
@@ -55,6 +68,8 @@ class TripPage extends Component {
 	}
 
 	render() {
+		console.log(this.state.arrived, 'date arrived');
+		console.log(this.state.left, 'date left');
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
 				{i + 1}: {yelp.categories[0].title} at <a href={yelp.url} target='_blank' rel='noopener noreferrer'>{yelp.name}</a><br/>

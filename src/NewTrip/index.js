@@ -8,8 +8,8 @@ class NewTrip extends Component {
 		this.state = {
 			name: '',
 			country: '',
-			dateArrived: Date.now(),
-			dateLeft: Date.now(),
+			dateArrived: '',
+			dateLeft: '',
 			notes: null
 		}
 	}
@@ -31,11 +31,11 @@ class NewTrip extends Component {
 					<input type='text' name='country' placeholder='Country of Trip' onChange={this.handleChange} /><br/>
 					<label>
 						Date of Arrival
-						<input type='datetime-local' name='dateArrived' onChange={this.handleChange} />
+						<input type='datetime-local' name='dateArrived' onChange={this.handleChange}/>
 					</label><br/>
 					<label>
 						Date Left
-						<input type='datetime-local' name='dateLeft' onChange={this.handleChange} />
+						<input type='datetime-local' name='dateLeft' onChange={this.handleChange}/>
 					</label><br/>
 					<label>Some notes about your trip:</label><br/>
 					<textarea name='notes' onChange={this.handleChange}></textarea>
