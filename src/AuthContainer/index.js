@@ -37,7 +37,7 @@ class AuthContainer extends Component {
 			registered: true
 		})
 	}
-
+// Reset state with the logout button.
 	logout = async () => {
 		try {
 			await fetch(`${process.env.REACT_APP_ROUTE}api/v1/auth/logout`, {

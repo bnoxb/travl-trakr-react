@@ -1,3 +1,4 @@
+// Goes to the UserContainer (because Trips are user specific), All the trip specific items then flow through here.
 import React, { Component } from 'react';
 import NewTrip from '../NewTrip';
 import TripPage from '../TripPage';
@@ -11,8 +12,9 @@ class TripContainer extends Component {
 		super();
 		this.state = {
 			trips: [],
-			newTripScreen: false,
 			currentTrip: {},
+			// Modals to show screens when actions are going to be done to trips.
+			newTripScreen: false,
 			showTripScreen: false,
 			showTripEdit: false,
 			showNoteAdd: false,
@@ -30,13 +32,14 @@ class TripContainer extends Component {
 			}
 		}
 	}
-
+// Populating all the trips a User has.
 	componentDidMount () {
 		this.getTrips();
 	}
 
 	addTrip = async (trip, e) => {
 		e.preventDefault();
+		// Necessary to make sure trip notes are in an array, not just a loose string.
 		trip.notes = [trip.notes];
 		if(trip.dateLeft )
 		try {
@@ -52,7 +55,6 @@ class TripContainer extends Component {
 			if(!tripCreateResponse.ok) {
 				throw Error(tripCreateResponse.statusText);
 			}
-
 			const parsedResponse = await tripCreateResponse.json();
 			this.setState({
 				trips: parsedResponse.data.user.trips,
@@ -129,8 +131,8 @@ class TripContainer extends Component {
 				name: trip.name,
 				state: trip.state,
 				country: trip.country,
-				// The slice is necessary to reformat so it pre-populates in the edit screen. It removes the #Z from the end of the date string
-				// Slice can only happen if the dates actually exist
+				// The slice is necessary to reformat so it pre-populates in the edit screen. It removes the '#Z' from the end of the date string
+				// Slice can only happen if the dates actually exist, so a ternary is needed to avoid errors.
 				dateArrived: trip.dateArrived ? trip.dateArrived.slice(0, -2) : '',
 				dateLeft: trip.dateLeft ? trip.dateLeft.slice(0, -2) : '',
 				notes: trip.notes,
@@ -138,7 +140,7 @@ class TripContainer extends Component {
 			}
 		})
 	}
-
+// This accesses the note adding screen.
 	addNote = (trip, e) => {
 		this.setState({
 			showNoteAdd: true,
@@ -197,7 +199,7 @@ class TripContainer extends Component {
 			}
 		})
 	}
-
+// Called as a type of "back" button from the edit screen.
 	undoEdit = (e) => {
 		this.setState({
 			showTripScreen: true,
@@ -253,7 +255,8 @@ class TripContainer extends Component {
 			console.log(err);
 		}
 	}
-
+// There are a lot of ternaries just to determine what action the user is taking.
+// If they are adding a trip, they shouldn't also be editing a trip and showing a different trip.
 	render() {
 		return(
 			<div id="trip-container">

@@ -1,3 +1,4 @@
+// In the UserContainer. Stays on top while the User is logged in.
 import React, { Component } from 'react';
 
 class UserPage extends Component {

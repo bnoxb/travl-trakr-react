@@ -1,7 +1,7 @@
+// In the trip container.
 import React, { Component } from 'react';
 import MapContainer from '../MapContainer';
 import Calendar from 'react-calendar';
-// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 class TripPage extends Component {
 	constructor() {
@@ -22,7 +22,7 @@ class TripPage extends Component {
 		this.getYelp();
 		this.checkForDate();
 	}
-// This is needed to make sure the Calendar can load properly
+// This is needed to make sure the Calendar can load properly. If the dates are in any other format, it throws a lot of errors.
 	checkForDate() {
 		if(this.props.currentTrip.dateLeft && this.props.currentTrip.dateArrived) {
 			this.setState({
@@ -42,7 +42,7 @@ class TripPage extends Component {
 			})
 		}
 	}
-
+// Calls the Yelp API to produce suggestions on where to go.
 	getYelp = async () => {
 		try {
 			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/yelp/${this.props.currentTrip._id}`, {
@@ -65,12 +65,14 @@ class TripPage extends Component {
 	}
 
 	render() {
+		// Takes the information from yelp, and makes a list out of it. Links to the yelp page for the business.
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
 				{i + 1}: {yelp.categories[0].title} at <a href={yelp.url} target='_blank' rel='noopener noreferrer'>{yelp.name}</a><br/>
 				Rated {yelp.rating} out of 5
 			</li>
 		})
+		// Displays notes made by the user about their trip
 		const noteList = this.props.currentTrip.notes.map((note, i) => {
 			if(note) {
 				return <li key={i}>
@@ -80,6 +82,7 @@ class TripPage extends Component {
 				return null
 			}
 		})
+		// Passing the yelp returns into the MapContainer so that the coordinates can be used on the map.
 		return(
 			<div>
 				<h3 id='trip-title'>{this.props.currentTrip.name} {this.props.currentTrip.state}<br/>{this.props.currentTrip.country}</h3>
@@ -100,12 +103,7 @@ class TripPage extends Component {
 				<ul id='yelp-list'>
 					{yelpList}
 				</ul>
-		
-
-
 			</div>
-
-
 		)
 	}
 }

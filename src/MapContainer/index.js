@@ -1,3 +1,4 @@
+// Comes from TripPage
 import React, { Component } from 'react';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
@@ -23,8 +24,16 @@ export class MapContainer extends Component {
 						}}
 					/>
 		});
+		// The map has to be inline styled to override the built-in inline styling that comes from Google.
 		return (
-			<div id="map" style={{width: '100%', height: '50vh', position: 'relative', 'marginLeft': 'auto', display: 'flex', 'flexDirection': 'column'}}>
+			<div id="map" style={
+				{width: '100%', 
+				height: '50vh', 
+				position: 'relative', 
+				'marginLeft': 'auto', 
+				display: 'flex', 
+				'flexDirection': 'column'}
+			}>
 				<Map
 					google={this.props.google}
 					style={style}
@@ -33,7 +42,7 @@ export class MapContainer extends Component {
 						lat: this.props.lat,
 						lng: this.props.lng
 					}}
-					>
+				>
 
 					{yelpsList}
 				</Map>
@@ -41,7 +50,7 @@ export class MapContainer extends Component {
 		)
 	}
 }
-
+// Uses the Google Maps API
 export default GoogleApiWrapper({
 	apiKey: `${process.env.REACT_APP_GOOGLE_API_KEY}`
 })(MapContainer);

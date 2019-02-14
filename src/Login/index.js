@@ -43,7 +43,7 @@ class Login extends Component {
 			})
 		}
 	}
-
+	// A message will render as an h4 if the user fails to log in properly.
 	render() {
 		return (
 			<div id='login'>

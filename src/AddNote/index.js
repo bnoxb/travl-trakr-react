@@ -1,3 +1,4 @@
+// connects into the TripContainer
 import React from 'react';
 
 

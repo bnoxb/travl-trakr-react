@@ -9,7 +9,7 @@ import './App.css';
 const My404 = () => {
 	return (
 		<div>
-			GOAWAYYYYYY
+			You've Taken a Wrong Turn
 		</div>
 	)
 }

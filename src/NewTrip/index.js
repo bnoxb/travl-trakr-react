@@ -1,3 +1,4 @@
+// Connects to TripContainer
 import React, { Component } from 'react';
 
 class NewTrip extends Component {
