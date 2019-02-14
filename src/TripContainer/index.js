@@ -73,6 +73,12 @@ class TripContainer extends Component {
 		})
 	}
 
+	hideNewTrip = (e) => {
+		this.setState({
+			newTripScreen: false
+		})
+	}
+
 	showTrip = async (trip, e) => {
 		try {
 			const response = await fetch(`http://localhost:9000/api/v1/trips/${trip._id}`, {
@@ -166,10 +172,11 @@ class TripContainer extends Component {
 					return trip;
 				}
 			});
-			console.log(mappedTrips);
 			this.setState({
 				trips: mappedTrips,
-				showTripEdit: false
+				showTripEdit: false,
+				showTripScreen: true,
+				currentTrip: parsedResponse.data
 			});
 		} catch(err) {
 			console.log(err);
@@ -190,6 +197,13 @@ class TripContainer extends Component {
 			noteToAdd: {
 				note: e.target.value
 			}
+		})
+	}
+
+	undoEdit = (e) => {
+		this.setState({
+			showTripScreen: true,
+			showTripEdit: false
 		})
 	}
 
@@ -249,8 +263,13 @@ class TripContainer extends Component {
 		return(
 			<div id="trip-container">
 				{this.state.newTripScreen ? 
-					<NewTrip history={this.props.history} addTrip={this.addTrip} /> : 
-					<button id='new-trip-button' onClick={this.newTrip}>Make a NewTrip</button>
+					<NewTrip history={this.props.history} addTrip={this.addTrip} hideNewTrip={this.hideNewTrip}/> : 
+						<div>
+							{this.state.showTripEdit ?
+								null :
+								<button id='new-trip-button' onClick={this.newTrip}>Make a NewTrip</button>
+							}
+						</div>
 				}
 				{this.state.showNoteAdd ? 
 					<AddNote handleAddNote={this.handleAddNote} handleNoteChange={this.handleNoteChange}/> : 
@@ -266,7 +285,7 @@ class TripContainer extends Component {
 					null
 				}
 				{this.state.showTripEdit ? 
-					<EditTrip handleEditFormInput={this.handleEditFormInput} tripToEdit={this.state.tripToEdit} handleTripEditSubmit={this.handleTripEditSubmit}/> : 
+					<EditTrip undoEdit={this.undoEdit} handleEditFormInput={this.handleEditFormInput} tripToEdit={this.state.tripToEdit} handleTripEditSubmit={this.handleTripEditSubmit}/> : 
 					<div>
 						{this.state.showTripScreen ? 
 							<TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} showEditTrip={this.showEditTrip} addNote={this.addNote}/> : 

@@ -57,7 +57,8 @@ class TripPage extends Component {
 	render() {
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
-				{i + 1}: {yelp.categories[0].title} at {yelp.name}
+				{i + 1}: {yelp.categories[0].title} at <a href={yelp.url} target="_blank">{yelp.name}</a><br/>
+				Rated {yelp.rating} out of 5
 			</li>
 		})
 		const noteList = this.props.currentTrip.notes.map((note, i) => {

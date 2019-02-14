@@ -19,8 +19,8 @@ const EditTrip = (props) => {
 						<input type='datetime-local' name='dateLeft' onChange={props.handleEditFormInput}/>
 					</label><br/>
 					<button>Edit your trip</button>
-
 				</form>
+				<button onClick={props.undoEdit}>Undo Edit</button>
 			</div>
 		)
 }

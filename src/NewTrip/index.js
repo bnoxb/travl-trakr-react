@@ -40,8 +40,8 @@ class NewTrip extends Component {
 					<label>Some notes about your trip:</label><br/>
 					<textarea name='notes' onChange={this.handleChange}></textarea>
 					<button>Make your trip</button>
-
 				</form>
+				<button onClick={this.props.hideNewTrip}>Undo New Trip</button>
 			</div>
 		)
 	}
