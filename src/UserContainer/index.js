@@ -83,6 +83,10 @@ class UserContainer extends Component {
 	render() {
 		return (
 			<div id="user-container">
+				<nav>
+					<a href="https://www.linkedin.com/in/timothy-mandel" className="fa fa-linkedin icon" id="linkedin"> </a>
+					<a href="https://www.github.com/tmandel2" className="fa fa-github icon" id="github"> </a>
+				</nav>
 				{this.state.showUserEdit ? 
 					<EditUser userToEdit={this.state.userToEdit} handleEditFormInput={this.handleEditFormInput} handleUserEditSubmit={this.handleUserEditSubmit} /> : 
 					<UserPage logout={this.props.logout} history={this.props.history} username={this.props.username} _id={this.props._id} deleteUser={this.deleteUser} showEditUser={this.showEditUser}/>}
