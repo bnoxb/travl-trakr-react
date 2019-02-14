@@ -293,8 +293,8 @@ textarea {
 }
 
 .fa {
-  padding: 20px;
-  font-size: 50px;
+  padding: 5px;
+  font-size: 18px;
   text-align: right;
   text-decoration: none;
   color: white;
@@ -310,7 +310,7 @@ textarea {
 
 nav {
   position: fixed;
-  top: 1%;
-  left: 1%;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }

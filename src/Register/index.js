@@ -53,8 +53,8 @@ class Register extends Component {
 		return (
 			<div id='register'>
 				<nav>
-					<a href="https://www.linkedin.com/in/timothy-mandel" className="fa fa-linkedin icon" id="linkedin"> </a>
-					<a href="https://www.github.com/tmandel2" className="fa fa-github icon" id="github"> </a>
+					<a href="https://www.linkedin.com/in/timothy-mandel" className="fa fa-linkedin icon" id="linkedin" target='_blank' rel='noopener noreferrer'> </a>
+					<a href="https://www.github.com/tmandel2" className="fa fa-github icon" id="github" target='_blank' rel='noopener noreferrer'> </a>
 				</nav>
 				<h1 id='register-title'>TravlTrakr</h1>
 				{this.state.message ? <h4>{this.state.message}</h4> : null}
