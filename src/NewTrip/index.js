@@ -8,8 +8,8 @@ class NewTrip extends Component {
 		this.state = {
 			name: '',
 			country: '',
-			dateArrived: '',
-			dateLeft: '',
+			dateArrived: Date.now(),
+			dateLeft: Date.now(),
 			notes: null
 		}
 	}

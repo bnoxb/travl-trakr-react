@@ -38,6 +38,8 @@ class TripContainer extends Component {
 	addTrip = async (trip, e) => {
 		e.preventDefault();
 		trip.notes = [trip.notes];
+		console.log(trip.dateLeft, 'date left');
+		console.log(trip.dateArrived, 'date arrived');
 		try {
 			const tripCreateResponse = await fetch('http://localhost:9000/api/v1/trips/', {
 				method: 'POST',
@@ -53,7 +55,7 @@ class TripContainer extends Component {
 			}
 
 			const parsedResponse = await tripCreateResponse.json();
-			console.log(parsedResponse);
+			console.log(parsedResponse.data.user.trips, 'trips');
 			this.setState({
 				trips: parsedResponse.data.user.trips,
 				newTripScreen: false
@@ -133,8 +135,9 @@ class TripContainer extends Component {
 				name: trip.name,
 				state: trip.state,
 				country: trip.country,
-				dateArrived: trip.dateArrived,
-				dateLeft: trip.dateLeft,
+				// The slice is necessary to reformat so it pre-populates in the edit screen. It removes the #Z from the end of the date string
+				dateArrived: trip.dateArrived.slice(0, -2),
+				dateLeft: trip.dateLeft.slice(0, -2),
 				notes: trip.notes,
 				_id: trip._id
 			}
