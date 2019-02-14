@@ -51,7 +51,7 @@ class Register extends Component {
 	render() {
 		return (
 			<div id='register'>
-				<h1 id='register-title'>TravlTrakr Registration</h1>
+				<h1 id='register-title'>TravlTrakr</h1>
 				{this.state.message ? <h4>{this.state.message}</h4> : null}
 				<div id='register-interactives'>
 					<form onSubmit={this.handleSubmit}>
