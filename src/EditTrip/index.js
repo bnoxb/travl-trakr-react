@@ -4,7 +4,7 @@ import React from 'react';
 const EditTrip = (props) => {
 
 	return (
-			<div>
+			<div id='edit-trip-page'>
 				<div>EditTrip</div>
 				<form onSubmit={props.handleTripEditSubmit}>
 					<input type='text' name='name' onChange={props.handleEditFormInput} value={props.tripToEdit.name}/><br/>
