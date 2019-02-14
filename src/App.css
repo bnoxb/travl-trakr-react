@@ -81,6 +81,11 @@ textarea {
   background-size: cover;
 }
 
+#login-title, #register-title {
+  font-size: 88px;
+  text-shadow: 4px 4px 8px red;
+}
+
 #login-interactives, #register-interactives {
   margin: auto;
   height: 50vh;

@@ -48,7 +48,7 @@ class Register extends Component {
 	render() {
 		return (
 			<div id='register'>
-				<h1>Register With TravlTrakr</h1>
+				<h1 id='register-title'>TravlTrakr Registration</h1>
 				<div id='register-interactives'>
 					<form onSubmit={this.handleSubmit}>
 						<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />

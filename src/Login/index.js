@@ -47,7 +47,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div id='login'>
-				<h1>Welcome to TravlTrakr</h1>
+				<h1 id='login-title'>TravlTrakr</h1>
 				<div id='login-interactives'>
 					<form onSubmit={this.handleSubmit}>
 						<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />
