@@ -34,6 +34,7 @@
 
 body {
   font-family: 'Righteous', cursive;
+  text-shadow: 1px 1px 2px white;
 }
 
 button {
@@ -50,6 +51,7 @@ button:hover {
 li {
   list-style: none;
   margin: 0 0 10px 0;
+  background-color: rgba(255,255,255,.7);
 }
 
 ul {
@@ -133,7 +135,8 @@ textarea {
 .user-page {
   display: flex;
   justify-content: center;
-  background-color: teal;
+  background: url('./images/tropical.jpeg');
+  background-size: cover;
   height: 10%;
   align-items: center;
   overflow: scroll;
@@ -149,7 +152,7 @@ textarea {
 #user-page-buttons {
   width: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 #user-page-buttons > button {
@@ -159,7 +162,8 @@ textarea {
 }
 
 #trip-container {
-  background-color: lightgreen;
+  background: url('./images/yacht.jpg');
+  background-size: cover;
   height: 90%;
   overflow: scroll;
 }
@@ -167,6 +171,7 @@ textarea {
 #your-trips {
   font-size: 48px;
   text-shadow: center;
+  background-color: rgba(255,255,255,.5);
 }
 
 #trip-list {
@@ -181,7 +186,7 @@ textarea {
   text-align: center;
   width: 100%;
   margin-bottom: 20px;
-  font-size: 30px
+  font-size: 30px;
 }
 
 #trip-list >li > button {
@@ -189,6 +194,32 @@ textarea {
   height: 20%;
   font-size: 20px;
 }
+
+#trip-nav {
+  display: flex;
+  justify-content: flex-end;
+  height: 30px;
+}
+
+#trip-nav > button {
+  width: 120px;
+  font-size: 14px;
+}
+
+#new-trip-button {
+  width: 160px;
+  height: 40px;
+  font-size: 18px;
+  background-color: gray;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  border: 1px solid chartreuse;
+}
+
+#new-trip-button:hover {
+  color: chartreuse;
+}
+
 
 #map-container {
   width: 100%;
@@ -203,6 +234,10 @@ textarea {
   height: 50vh;
   display: flex;
   justify-content: center;
+}
+
+.react-calendar__navigation__label {
+  font-size: 18px
 }
 
 #map-and-calendar {
@@ -240,4 +275,18 @@ textarea {
   height: 30px;
   width: 50%;
   font-size: 18px;
+}
+
+#note-list {
+  font-size: 25px;
+}
+
+#yelp-title {
+  font-size: 25px;
+  background-color: rgba(255,255,255,.7);
+}
+
+#trip-title {
+  font-size: 36px;
+  background-color: rgba(255,255,255,.7);
 }

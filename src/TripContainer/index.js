@@ -250,16 +250,16 @@ class TripContainer extends Component {
 			<div id="trip-container">
 				{this.state.newTripScreen ? 
 					<NewTrip history={this.props.history} addTrip={this.addTrip} /> : 
-					<button onClick={this.newTrip}>Make a NewTrip</button>
+					<button id='new-trip-button' onClick={this.newTrip}>Make a NewTrip</button>
 				}
 				{this.state.showNoteAdd ? 
 					<AddNote handleAddNote={this.handleAddNote} handleNoteChange={this.handleNoteChange}/> : 
 					null
 				}
 				{this.state.showTripScreen ? 
-					<div>
+					<div id='trip-nav'>
 						<button onClick={this.hideTrip}>Back to List</button>
-						<button onClick={this.addNote.bind(null, this.state.currentTrip)}>Add Note</button>						
+						<button onClick={this.addNote.bind(null, this.state.currentTrip)}>Add Note</button>
 						<button onClick={this.showEditTrip.bind(null, this.state.currentTrip)}>Edit This Trip</button>
 						<button onClick={this.deleteTrip}>Delete This Trip</button>
 					</div> :

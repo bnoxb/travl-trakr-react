@@ -69,8 +69,8 @@ class TripPage extends Component {
 		})
 		return(
 			<div>
-				<h3>{this.props.currentTrip.name} {this.props.currentTrip.state}<br/>{this.props.currentTrip.country}</h3>
-				<ul>
+				<h3 id='trip-title'>{this.props.currentTrip.name} {this.props.currentTrip.state}<br/>{this.props.currentTrip.country}</h3>
+				<ul id='note-list'>
 					{noteList}
 				</ul>
 				<div id='map-and-calendar'>
@@ -83,8 +83,8 @@ class TripPage extends Component {
 					}
 				</div>
 
-				<h4>What is Hot and New?</h4>
-				<ul>
+				<h4 id='yelp-title'>What is Hot and New?</h4>
+				<ul id='yelp-list'>
 					{yelpList}
 				</ul>
 		
