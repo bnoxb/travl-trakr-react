@@ -7,7 +7,8 @@ class Register extends Component {
 		this.state = {
 			username: '',
 			password: '',
-			email: ''
+			email: '',
+			message: ''
 		}
 	}
 // Collects what the user is typing
@@ -41,7 +42,9 @@ class Register extends Component {
 
 
 		} catch(err) {
-			console.log(err, ' this is err');
+			this.setState({
+				message: 'Try a different username'
+			})
 		}
 	}
 
@@ -49,6 +52,7 @@ class Register extends Component {
 		return (
 			<div id='register'>
 				<h1 id='register-title'>TravlTrakr Registration</h1>
+				{this.state.message ? <h4>{this.state.message}</h4> : null}
 				<div id='register-interactives'>
 					<form onSubmit={this.handleSubmit}>
 						<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />

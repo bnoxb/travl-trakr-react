@@ -9,7 +9,8 @@ class Login extends Component {
 // Captures the users typing for the login process
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			message: ''
 		}
 	}
 
@@ -30,17 +31,16 @@ class Login extends Component {
 					'Content-Type': 'application/json'
 				}
 			});
-
 			if(!loginResponse.ok) {
 				throw Error(loginResponse.statusText);
 			}
-
 			const parsedResponse = await loginResponse.json();
-
 			this.props.login(parsedResponse.data.user);
 
 		} catch(err) {
-			console.log(err, ' this is err');
+			this.setState({
+				message: 'Try a different username or password.'
+			})
 		}
 	}
 
@@ -48,6 +48,7 @@ class Login extends Component {
 		return (
 			<div id='login'>
 				<h1 id='login-title'>TravlTrakr</h1>
+				{this.state.message ? <h4>{this.state.message}</h4> : null}
 				<div id='login-interactives'>
 					<form onSubmit={this.handleSubmit}>
 						<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />

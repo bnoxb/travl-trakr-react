@@ -1,37 +1,3 @@
-/*.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-*/
-
 body {
   font-family: 'Righteous', cursive;
   text-shadow: 1px 1px 2px white;
@@ -96,7 +62,7 @@ textarea {
 }
 
 #login-interactives > form, #register-interactives > form {
-  height: 40%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -112,7 +78,7 @@ textarea {
 
 #login-interactives > form > button, #register-interactives > form > button {
   font-size: 20px;
-  height: 30%;
+  height: 35px;
 }
 
 #login-interactives > button, #register-interactives > button {
@@ -140,7 +106,8 @@ textarea {
 .user-page {
   display: flex;
   justify-content: center;
-  background: url('./images/tropical.jpeg');
+  /*background: url('./images/tropical.jpeg');*/
+  background-color: skyblue;
   background-size: cover;
   height: 10%;
   align-items: center;
@@ -198,6 +165,8 @@ textarea {
   width: 50%;
   height: 20%;
   font-size: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #trip-nav {
@@ -294,4 +263,24 @@ textarea {
 #trip-title {
   font-size: 36px;
   background-color: rgba(255,255,255,.7);
+}
+
+#edit-user-form {
+  display: flex;
+}
+
+#edit-user-form > input {
+  text-align: center;
+  margin: 0 5px;
+  width: 40%;
+  font-size: 18px
+}
+
+#edit-user-form > button {
+  width: 30%;
+  font-size: 16px
+}
+
+.edit-user-page {
+  font-size: 24px
 }
