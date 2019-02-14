@@ -159,6 +159,7 @@ textarea {
   width: 100%;
   margin-bottom: 20px;
   font-size: 30px;
+  break-inside: avoid-column;
 }
 
 #trip-list >li > button {

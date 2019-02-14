@@ -66,7 +66,7 @@ class AuthContainer extends Component {
 			<div>
 				
 				{this.state.loggedIn ? 
-					<UserContainer logout={this.logout} history={this.props.history} username={this.state.username} _id={this.state._id} logout={this.logout}/>
+					<UserContainer logout={this.logout} history={this.props.history} username={this.state.username} _id={this.state._id}/>
 					: this.state.registered ? 
 						<Login history={this.props.history} login={this.login} showRegister={this.showRegister}/>
 						: <Register history={this.props.history} login={this.login} showLogin={this.showLogin}/>
