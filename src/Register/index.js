@@ -21,7 +21,7 @@ class Register extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const loginResponse = await fetch('http://localhost:9000/api/v1/auth/', {
+			const loginResponse = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/auth/`, {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(this.state),

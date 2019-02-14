@@ -25,13 +25,11 @@ class TripPage extends Component {
 // This is needed to make sure the Calendar can load properly
 	checkForDate() {
 		if(this.props.currentTrip.dateLeft && this.props.currentTrip.dateArrived) {
-			console.log('HERE');
 			this.setState({
 				left: new Date(`${this.props.currentTrip.dateLeft}`),
 				arrived: new Date(`${this.props.currentTrip.dateArrived}`)
 			})
 		} else if (this.props.currentTrip.dateLeft || this.props.currentTrip.dateArrived) {
-			console.log('THERE');
 			const leftCheck = this.props.currentTrip.dateLeft === null ? 
 				new Date(`${this.props.currentTrip.dateArrived}`) : 
 				new Date(`${this.props.currentTrip.dateLeft}`);
@@ -47,14 +45,13 @@ class TripPage extends Component {
 
 	getYelp = async () => {
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/trips/yelp/${this.props.currentTrip._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/yelp/${this.props.currentTrip._id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
 				throw Error(response.statusText);
 			}
 			const parsedResponse = await response.json();
-			console.log(parsedResponse);
 			this.setState({
 				yelps: parsedResponse.data.jsonBody.businesses,
 				lat: parsedResponse.data.jsonBody.region.center.latitude,
@@ -68,8 +65,6 @@ class TripPage extends Component {
 	}
 
 	render() {
-		console.log(this.state.arrived, 'date arrived');
-		console.log(this.state.left, 'date left');
 		const yelpList = this.state.yelps.map((yelp, i) => {
 			return <li key={i}>
 				{i + 1}: {yelp.categories[0].title} at <a href={yelp.url} target='_blank' rel='noopener noreferrer'>{yelp.name}</a><br/>

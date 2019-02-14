@@ -38,10 +38,9 @@ class TripContainer extends Component {
 	addTrip = async (trip, e) => {
 		e.preventDefault();
 		trip.notes = [trip.notes];
-		console.log(trip.dateLeft, 'date left');
-		console.log(trip.dateArrived, 'date arrived');
+		if(trip.dateLeft )
 		try {
-			const tripCreateResponse = await fetch('http://localhost:9000/api/v1/trips/', {
+			const tripCreateResponse = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/`, {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(trip),
@@ -55,13 +54,10 @@ class TripContainer extends Component {
 			}
 
 			const parsedResponse = await tripCreateResponse.json();
-			console.log(parsedResponse.data.user.trips, 'trips');
 			this.setState({
 				trips: parsedResponse.data.user.trips,
 				newTripScreen: false
 			})
-
-			console.log(parsedResponse);
 
 		} catch(err) {
 			console.log(err);
@@ -83,14 +79,13 @@ class TripContainer extends Component {
 
 	showTrip = async (trip, e) => {
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/trips/${trip._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${trip._id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
 				throw Error(response.statusText);
 			}
 			const tripParsed = await response.json();
-			console.log('ShowTrip triggered');
 			this.setState({
 				currentTrip: tripParsed.data,
 				showTripScreen: true,
@@ -110,7 +105,7 @@ class TripContainer extends Component {
 
 	getTrips = async () => {
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/users/${this.props._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/users/${this.props._id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
@@ -127,7 +122,6 @@ class TripContainer extends Component {
 	}
 
 	showEditTrip = (trip, e) => {
-		console.log(trip.dateArrived);
 		this.setState({
 			showTripEdit: true,
 			showTripScreen: false,
@@ -136,8 +130,9 @@ class TripContainer extends Component {
 				state: trip.state,
 				country: trip.country,
 				// The slice is necessary to reformat so it pre-populates in the edit screen. It removes the #Z from the end of the date string
-				dateArrived: trip.dateArrived.slice(0, -2),
-				dateLeft: trip.dateLeft.slice(0, -2),
+				// Slice can only happen if the dates actually exist
+				dateArrived: trip.dateArrived ? trip.dateArrived.slice(0, -2) : '',
+				dateLeft: trip.dateLeft ? trip.dateLeft.slice(0, -2) : '',
 				notes: trip.notes,
 				_id: trip._id
 			}
@@ -156,7 +151,7 @@ class TripContainer extends Component {
 	handleTripEditSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/trips/${this.state.tripToEdit._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.tripToEdit._id}`, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.tripToEdit),
@@ -213,7 +208,7 @@ class TripContainer extends Component {
 	handleAddNote = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/trips/${this.state.tripToEdit._id}/addNote`, {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.tripToEdit._id}/addNote`, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.noteToAdd),
@@ -225,7 +220,6 @@ class TripContainer extends Component {
 				throw Error(response.statusText);
 			}
 			const parsedResponse = await response.json();
-			console.log(parsedResponse);
 			const mappedTrips = this.state.trips.map((trip) => {
 				if(trip._id === this.state.tripToEdit._id) {
 					return parsedResponse.data;
@@ -233,7 +227,6 @@ class TripContainer extends Component {
 					return trip;
 				}
 			});
-			console.log(mappedTrips);
 			this.setState({
 				trips: mappedTrips,
 				showNoteAdd: false,
@@ -246,9 +239,8 @@ class TripContainer extends Component {
 
 	deleteTrip = async (e) => {
 		e.preventDefault();
-		console.log(this.state.currentTrip._id);
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/trips/${this.state.currentTrip._id}`, {
+			await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.currentTrip._id}`, {
 				method: 'DELETE',
 				credentials: 'include'
 			});

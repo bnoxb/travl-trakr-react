@@ -40,7 +40,7 @@ class AuthContainer extends Component {
 
 	logout = async () => {
 		try {
-			const response = await fetch('http://localhost:9000/api/v1/auth/logout', {
+			await fetch(`${process.env.REACT_APP_ROUTE}api/v1/auth/logout`, {
 				credentials: 'include'
 			});
 			this.setState({

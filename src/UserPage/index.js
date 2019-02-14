@@ -15,7 +15,7 @@ class UserPage extends Component {
 
 	getUser = async () => {
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/users/${this.props._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/users/${this.props._id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){

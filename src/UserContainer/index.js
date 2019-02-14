@@ -25,7 +25,7 @@ class UserContainer extends Component {
 	deleteUser = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/users/${this.props._id}`, {
+			await fetch(`${process.env.REACT_APP_ROUTE}api/v1/users/${this.props._id}`, {
 				method: 'DELETE',
 				credentials: 'include'
 			});
@@ -51,7 +51,7 @@ class UserContainer extends Component {
 	handleUserEditSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:9000/api/v1/users/${this.state.userToEdit._id}/edited`, {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/users/${this.state.userToEdit._id}/edited`, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.userToEdit),
@@ -62,8 +62,7 @@ class UserContainer extends Component {
 			if(!response.ok){
 				throw Error(response.statusText);
 			}
-			const parsedResponse = await response.json();
-			console.log(parsedResponse);
+			await response.json();
 			this.setState({
 				showUserEdit: false
 			})
