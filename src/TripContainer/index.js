@@ -254,6 +254,39 @@ class TripContainer extends Component {
 			console.log(err);
 		}
 	}
+
+	deleteNote = async (i, e) => {
+		e.preventDefault();
+		const currentNotes = this.state.currentTrip.notes;
+		currentNotes.splice(i, 1);
+		try {
+			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.currentTrip._id}/deleteNote`, {
+				method: 'PUT',
+				credentials: 'include',
+				body: JSON.stringify(currentNotes),
+				headers:{
+					'Content-Type': 'application/json'
+				}
+			});
+			if(!response.ok){
+				throw Error(response.statusText);
+			}
+			const parsedResponse = await response.json();
+			const mappedTrips = this.state.trips.map((trip) => {
+				if(trip._id === this.state.currentTrip._id) {
+					return parsedResponse.data;
+				} else {
+					return trip;
+				}
+			});
+			this.setState({
+				trips: mappedTrips,
+				currentTrip: parsedResponse.data
+			});
+		} catch(err) {
+			console.log(err);
+		}
+	}
 // There are a lot of ternaries just to determine what action the user is taking.
 // If they are adding a trip, they shouldn't also be editing a trip and showing a different trip.
 	render() {
@@ -285,7 +318,7 @@ class TripContainer extends Component {
 					<EditTrip undoEdit={this.undoEdit} handleEditFormInput={this.handleEditFormInput} tripToEdit={this.state.tripToEdit} handleTripEditSubmit={this.handleTripEditSubmit}/> : 
 					<div>
 						{this.state.showTripScreen ? 
-							<TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} showEditTrip={this.showEditTrip} addNote={this.addNote}/> : 
+							<TripPage currentTrip={this.state.currentTrip} hideTrip={this.hideTrip} deleteTrip={this.deleteTrip} showEditTrip={this.showEditTrip} addNote={this.addNote} deleteNote={this.deleteNote}/> : 
 							<TripList trips={this.state.trips} showTrip={this.showTrip} />
 						}
 					</div>
