@@ -256,6 +256,15 @@ textarea {
 
 #note-list {
   font-size: 25px;
+  columns: 3;
+  padding: 0;
+}
+
+#note-list > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  break-inside: avoid-column;
 }
 
 #yelp-title {

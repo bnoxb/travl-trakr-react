@@ -94,7 +94,7 @@ class TripPage extends Component {
 		const noteList = this.props.currentTrip.notes.map((note, i) => {
 			if(note) {
 				return <li key={i}>
-					>{note} <br/>
+					{note}
 					<button onClick={this.props.deleteNote.bind(null, i)}>Delete</button>
 				</li>
 			} else {
