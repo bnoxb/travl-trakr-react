@@ -41,7 +41,6 @@ class TripContainer extends Component {
 		e.preventDefault();
 		// Necessary to make sure trip notes are in an array, not just a loose string.
 		trip.notes = [trip.notes];
-		if(trip.dateLeft )
 		try {
 			const tripCreateResponse = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/`, {
 				method: 'POST',

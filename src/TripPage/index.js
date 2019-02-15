@@ -14,7 +14,8 @@ class TripPage extends Component {
 			lng: 0,
 			loading: true,
 			left: null,
-			arrived: null
+			arrived: null,
+			yelpResults: ''
 		}
 	}
 
@@ -42,12 +43,28 @@ class TripPage extends Component {
 			})
 		}
 	}
-// Calls the Yelp API to produce suggestions on where to go.
+// Calls the Yelp API to produce suggestions on where to go. Randomly picks from 3 types of results
 	getYelp = async () => {
+		const random = Math.floor(Math.random() * (3)) + 1;
+		let note;
+		let response;
 		try {
-			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/yelp/${this.props.currentTrip._id}`, {
-				credentials: 'include'
-			});
+			if (random === 3) {
+				response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/yelp/${this.props.currentTrip._id}/hot_and_new`, {
+					credentials: 'include'
+				});
+				note = 'What is Hot and New';
+			} else if (random === 2) {
+				response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/yelp/${this.props.currentTrip._id}/most_reviewed`, {
+					credentials: 'include'
+				});
+				note = 'What is the Most Reviewed';
+			} else {
+				response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/yelp/${this.props.currentTrip._id}/best_match`, {
+					credentials: 'include'
+				});
+				note = 'Best Matches for the Trip';
+			}
 			if(!response.ok){
 				throw Error(response.statusText);
 			}
@@ -56,6 +73,7 @@ class TripPage extends Component {
 				yelps: parsedResponse.data.jsonBody.businesses,
 				lat: parsedResponse.data.jsonBody.region.center.latitude,
 				lng: parsedResponse.data.jsonBody.region.center.longitude,
+				yelpResults: note,
 				loading: false
 			})
 		} catch(err) {
@@ -99,7 +117,7 @@ class TripPage extends Component {
 					}
 				</div>
 
-				<h4 id='yelp-title'>What is Hot and New?</h4>
+				<h4 id='yelp-title'>{this.state.yelpResults}</h4>
 				<ul id='yelp-list'>
 					{yelpList}
 				</ul>
