@@ -1,7 +1,6 @@
 # TRAVL TRAKR:
 
 Travel tracking app, for either future or past travel. Get ideas of what to do, and familiarize yourself with where you'll be.
-Works best for domestic travel.
 
 ### User Story
 
@@ -20,7 +19,7 @@ Create Trip: User provides the city, country, dates of travel, and any notes abo
 
 ### API usage
 
-Local API holds the cities the person entered. Any notes they have about the places, name, country, dates, etc.
+Local API holds the cities the user entered. Any notes they have about the places, name, country, dates of travel.
 
 The remote APIs are google maps and Yelp’s API for some business information in the city.
 
