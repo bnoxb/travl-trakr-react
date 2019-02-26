@@ -16,7 +16,7 @@ class UserContainer extends Component {
 				username: '',
 				email: '',
 				password: '',
-				_id: '',
+				id: '',
 				trips: []
 			}
 		}
@@ -25,7 +25,7 @@ class UserContainer extends Component {
 	deleteUser = async (e) => {
 		e.preventDefault();
 		try {
-			await fetch(`${process.env.REACT_APP_ROUTE}api/v1/users/${this.props._id}`, {
+			await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/${this.props.id}`, {
 				method: 'DELETE',
 				credentials: 'include'
 			});
@@ -36,13 +36,14 @@ class UserContainer extends Component {
 	}
 
 	showEditUser = (user, e) => {
+		console.log(`This is showEditUser: ${JSON.stringify(user)} is being passed in`);
 		this.setState({
 			showUserEdit: true,
 			userToEdit: {
 				username: user.username,
 				password: user.password,
 				email: user.email,
-				_id: user._id,
+				id: user.id,
 				trips: user.trips
 			}
 		})
@@ -50,8 +51,9 @@ class UserContainer extends Component {
 
 	handleUserEditSubmit = async (e) => {
 		e.preventDefault();
+		console.log(this.state.userToEdit);
 		try {
-			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/users/${this.state.userToEdit._id}/edited`, {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/${this.state.userToEdit.id}`, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.userToEdit),
@@ -89,8 +91,8 @@ class UserContainer extends Component {
 				</nav>
 				{this.state.showUserEdit ? 
 					<EditUser userToEdit={this.state.userToEdit} handleEditFormInput={this.handleEditFormInput} handleUserEditSubmit={this.handleUserEditSubmit} /> : 
-					<UserPage logout={this.props.logout} history={this.props.history} username={this.props.username} _id={this.props._id} deleteUser={this.deleteUser} showEditUser={this.showEditUser}/>}
-				<TripContainer history={this.props.history} username={this.props.username} _id={this.props._id}/>
+					<UserPage logout={this.props.logout} history={this.props.history} username={this.props.username} id={this.props.id} deleteUser={this.deleteUser} showEditUser={this.showEditUser}/>}
+				<TripContainer history={this.props.history} username={this.props.username} id={this.props.id}/>
 			</div>
 		)
 	}

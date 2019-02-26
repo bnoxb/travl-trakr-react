@@ -12,16 +12,17 @@ class AuthContainer extends Component {
 		this.state = {
 			loggedIn: false,
 			username: '',
-			_id: '',
+			id: '',
 			registered: true
 		}
 	}
 
 	login = (user) => {
+		console.log(`entering in: ${user}`);
 		this.setState({
 			loggedIn: true,
 			username: user.username,
-			_id: user._id,
+			id: user.id,
 			registered: true
 		});
 	}
@@ -46,7 +47,7 @@ class AuthContainer extends Component {
 			this.setState({
 				loggedIn: false,
 				username: '',
-				_id: '',
+				id: '',
 				registered: true
 			});
 		} catch(err) {
@@ -61,12 +62,13 @@ class AuthContainer extends Component {
 	}
 
 	render() {
+		console.log(`this.state is ${this.state}`);
 // This has a switch for if a person is logged in, it'll show the main part of the app, but if they aren't, it accesses a switch to show either register or login page
 		return (
 			<div>
 				
 				{this.state.loggedIn ? 
-					<UserContainer logout={this.logout} history={this.props.history} username={this.state.username} _id={this.state._id}/>
+					<UserContainer logout={this.logout} history={this.props.history} username={this.state.username} id={this.state.id}/>
 					: this.state.registered ? 
 						<Login history={this.props.history} login={this.login} showRegister={this.showRegister}/>
 						: <Register history={this.props.history} login={this.login} showLogin={this.showLogin}/>

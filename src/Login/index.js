@@ -23,7 +23,7 @@ class Login extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const loginResponse = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/auth/login`, {
+			const loginResponse = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/login`, {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(this.state),
@@ -35,7 +35,7 @@ class Login extends Component {
 				throw Error(loginResponse.statusText);
 			}
 			const parsedResponse = await loginResponse.json();
-			this.props.login(parsedResponse.data.user);
+			this.props.login(parsedResponse);
 
 		} catch(err) {
 			this.setState({

@@ -22,7 +22,7 @@ class Register extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const loginResponse = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/auth/`, {
+			const loginResponse = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/register`, {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(this.state),
@@ -36,8 +36,9 @@ class Register extends Component {
 			}
 
 			const parsedResponse = await loginResponse.json();
+			console.log(parsedResponse);
 // Logs in the new user, so that their user page will now show
-			this.props.login(parsedResponse.data.user);
+			this.props.login(parsedResponse);
 
 
 

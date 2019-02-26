@@ -106,7 +106,7 @@ class TripContainer extends Component {
 
 	getTrips = async () => {
 		try {
-			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/users/${this.props._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/${this.props.id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
