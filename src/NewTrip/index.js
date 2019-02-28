@@ -11,7 +11,7 @@ class NewTrip extends Component {
 			country: '',
 			dateArrived: '',
 			dateLeft: '',
-			notes: null
+			initialNote: ''
 		}
 	}
 
@@ -32,14 +32,14 @@ class NewTrip extends Component {
 					<input type='text' name='country' placeholder='Country of Trip' onChange={this.handleChange} /><br/>
 					<label>
 						Date of Arrival
-						<input type='datetime-local' name='dateArrived' onChange={this.handleChange}/>
+						<input type='date' name='dateArrived' onChange={this.handleChange}/>
 					</label><br/>
 					<label>
 						Date Left
-						<input type='datetime-local' name='dateLeft' onChange={this.handleChange}/>
+						<input type='date' name='dateLeft' onChange={this.handleChange}/>
 					</label><br/>
 					<label>Some notes about your trip:</label><br/>
-					<textarea name='notes' onChange={this.handleChange}></textarea>
+					<textarea name='initialNote' onChange={this.handleChange}></textarea>
 					<button>Make your trip</button>
 				</form>
 				<button onClick={this.props.hideNewTrip}>Undo New Trip</button>

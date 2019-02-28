@@ -18,7 +18,6 @@ class AuthContainer extends Component {
 	}
 
 	login = (user) => {
-		console.log(`entering in: ${user}`);
 		this.setState({
 			loggedIn: true,
 			username: user.username,
@@ -62,7 +61,6 @@ class AuthContainer extends Component {
 	}
 
 	render() {
-		console.log(`this.state is ${this.state}`);
 // This has a switch for if a person is logged in, it'll show the main part of the app, but if they aren't, it accesses a switch to show either register or login page
 		return (
 			<div>

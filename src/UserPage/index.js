@@ -15,7 +15,6 @@ class UserPage extends Component {
 	}
 
 	getUser = async () => {
-		console.log(`trying to getUser in UserPAge id is: ${this.props.id}`);
 		try {
 			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/${this.props.id}`, {
 				credentials: 'include'

@@ -24,8 +24,7 @@ class TripContainer extends Component {
 				country: '',
 				dateArrived: '',
 				dateLeft: '',
-				notes: [],
-				_id: null
+				id: null
 			},
 			noteToAdd: {
 				note: ''
@@ -40,9 +39,10 @@ class TripContainer extends Component {
 	addTrip = async (trip, e) => {
 		e.preventDefault();
 		// Necessary to make sure trip notes are in an array, not just a loose string.
-		trip.notes = [trip.notes];
+		// For now changing it to a string!
+		// trip.notes = [trip.notes];
 		try {
-			const tripCreateResponse = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/`, {
+			const tripCreateResponse = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/trips/`, {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(trip),
@@ -55,8 +55,9 @@ class TripContainer extends Component {
 				throw Error(tripCreateResponse.statusText);
 			}
 			const parsedResponse = await tripCreateResponse.json();
+			console.log(parsedResponse);
 			this.setState({
-				trips: parsedResponse.data.user.trips,
+				trips: [...this.state.trips, parsedResponse],
 				newTripScreen: false
 			})
 
@@ -80,7 +81,7 @@ class TripContainer extends Component {
 
 	showTrip = async (trip, e) => {
 		try {
-			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${trip._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/trips/${trip.id}`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
@@ -88,7 +89,7 @@ class TripContainer extends Component {
 			}
 			const tripParsed = await response.json();
 			this.setState({
-				currentTrip: tripParsed.data,
+				currentTrip: tripParsed,
 				showTripScreen: true,
 				newTripScreen: false
 			})
@@ -106,15 +107,17 @@ class TripContainer extends Component {
 
 	getTrips = async () => {
 		try {
-			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/${this.props.id}`, {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/${this.props.id}/trips`, {
 				credentials: 'include'
 			});
 			if(!response.ok){
 				throw Error(response.statusText);
 			}
 			const userParsed = await response.json();
-			this.setState({
-				trips: userParsed.data.trips
+			
+			await this.setState({
+				trips: userParsed
+				
 			})
 		} catch(err) {
 			console.log(err);
@@ -123,6 +126,9 @@ class TripContainer extends Component {
 	}
 
 	showEditTrip = (trip, e) => {
+		const newDateArrived = new Date(trip.dateArrived);
+		const newDateLeft = new Date(trip.dateLeft);
+		console.log(`Date Arrived: ${newDateArrived} and the date left: ${newDateLeft}`);
 		this.setState({
 			showTripEdit: true,
 			showTripScreen: false,
@@ -132,10 +138,12 @@ class TripContainer extends Component {
 				country: trip.country,
 				// The slice is necessary to reformat so it pre-populates in the edit screen. It removes the '#Z' from the end of the date string
 				// Slice can only happen if the dates actually exist, so a ternary is needed to avoid errors.
-				dateArrived: trip.dateArrived ? trip.dateArrived.slice(0, -2) : '',
-				dateLeft: trip.dateLeft ? trip.dateLeft.slice(0, -2) : '',
+				dateArrived: newDateArrived, 
+				//? trip.dateArrived.slice(0, -2) : '',
+				dateLeft: newDateLeft,
+				// ? trip.dateLeft.slice(0, -2) : '',
 				notes: trip.notes,
-				_id: trip._id
+				id: trip.id
 			}
 		})
 	}
@@ -144,7 +152,7 @@ class TripContainer extends Component {
 		this.setState({
 			showNoteAdd: true,
 			tripToEdit: {
-				_id: trip._id
+				id: trip.id
 			}
 		})
 	}
@@ -152,7 +160,7 @@ class TripContainer extends Component {
 	handleTripEditSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.tripToEdit._id}`, {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/trips/${this.state.tripToEdit.id}`, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.tripToEdit),
@@ -165,8 +173,8 @@ class TripContainer extends Component {
 			}
 			const parsedResponse = await response.json();
 			const mappedTrips = this.state.trips.map((trip) => {
-				if(trip._id === this.state.tripToEdit._id) {
-					return parsedResponse.data;
+				if(trip.id === this.state.tripToEdit.id) {
+					return parsedResponse;
 				} else {
 					return trip;
 				}
@@ -175,7 +183,7 @@ class TripContainer extends Component {
 				trips: mappedTrips,
 				showTripEdit: false,
 				showTripScreen: true,
-				currentTrip: parsedResponse.data
+				currentTrip: parsedResponse
 			});
 		} catch(err) {
 			console.log(err);
@@ -208,11 +216,12 @@ class TripContainer extends Component {
 
 	handleAddNote = async (e) => {
 		e.preventDefault();
+		console.log(this.state.noteToAdd);
 		try {
-			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.tripToEdit._id}/addNote`, {
-				method: 'PUT',
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/trips/${this.state.tripToEdit.id}/notesAdd`, {
+				method: 'POST',
 				credentials: 'include',
-				body: JSON.stringify(this.state.noteToAdd),
+				body: JSON.stringify(this.state.noteToAdd.note),
 				headers:{
 					'Content-Type': 'application/json'
 				}
@@ -221,17 +230,10 @@ class TripContainer extends Component {
 				throw Error(response.statusText);
 			}
 			const parsedResponse = await response.json();
-			const mappedTrips = this.state.trips.map((trip) => {
-				if(trip._id === this.state.tripToEdit._id) {
-					return parsedResponse.data;
-				} else {
-					return trip;
-				}
-			});
+			console.log(parsedResponse);
 			this.setState({
-				trips: mappedTrips,
 				showNoteAdd: false,
-				currentTrip: parsedResponse.data
+				showTripScreen: false,
 			});
 		} catch(err) {
 			console.log(err);
@@ -241,12 +243,12 @@ class TripContainer extends Component {
 	deleteTrip = async (e) => {
 		e.preventDefault();
 		try {
-			await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.currentTrip._id}`, {
+			await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/trips/${this.state.currentTrip.id}`, {
 				method: 'DELETE',
 				credentials: 'include'
 			});
 			this.setState({
-				trips: this.state.trips.filter(trip => trip._id !== this.state.currentTrip._id),
+				trips: this.state.trips.filter(trip => trip.id !== this.state.currentTrip.id),
 				showTripScreen: false
 
 			})
@@ -255,38 +257,7 @@ class TripContainer extends Component {
 		}
 	}
 
-	deleteNote = async (i, e) => {
-		e.preventDefault();
-		const currentNotes = this.state.currentTrip.notes;
-		currentNotes.splice(i, 1);
-		try {
-			const response = await fetch(`${process.env.REACT_APP_ROUTE}api/v1/trips/${this.state.currentTrip._id}/deleteNote`, {
-				method: 'PUT',
-				credentials: 'include',
-				body: JSON.stringify(currentNotes),
-				headers:{
-					'Content-Type': 'application/json'
-				}
-			});
-			if(!response.ok){
-				throw Error(response.statusText);
-			}
-			const parsedResponse = await response.json();
-			const mappedTrips = this.state.trips.map((trip) => {
-				if(trip._id === this.state.currentTrip._id) {
-					return parsedResponse.data;
-				} else {
-					return trip;
-				}
-			});
-			this.setState({
-				trips: mappedTrips,
-				currentTrip: parsedResponse.data
-			});
-		} catch(err) {
-			console.log(err);
-		}
-	}
+	
 // There are a lot of ternaries just to determine what action the user is taking.
 // If they are adding a trip, they shouldn't also be editing a trip and showing a different trip.
 	render() {
