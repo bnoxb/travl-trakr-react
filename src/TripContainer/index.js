@@ -221,7 +221,7 @@ class TripContainer extends Component {
 			const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/trips/${this.state.tripToEdit.id}/notesAdd`, {
 				method: 'POST',
 				credentials: 'include',
-				body: JSON.stringify(this.state.noteToAdd.note),
+				body: JSON.stringify(this.state.noteToAdd),
 				headers:{
 					'Content-Type': 'application/json'
 				}
