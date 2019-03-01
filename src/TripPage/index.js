@@ -47,7 +47,7 @@ class TripPage extends Component {
 			})
 		}
 	}
-
+	// Random comment to redeploy
 	getNotes = async () => {
 		console.log(`CHECKING CURRENTTRIP in TRIPPAGE: ${this.props.currentTrip}`);
 		try{
