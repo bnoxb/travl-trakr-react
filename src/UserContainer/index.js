@@ -86,8 +86,8 @@ class UserContainer extends Component {
 		return (
 			<div id="user-container">
 				<nav>
-					<a href="https://www.linkedin.com/in/timothy-mandel" className="fa fa-linkedin icon" id="linkedin" target='_blank' rel='noopener noreferrer'> </a>
-					<a href="https://www.github.com/tmandel2" className="fa fa-github icon" id="github" target='_blank' rel='noopener noreferrer'> </a>
+					<a href="https://www.linkedin.com/in/robert-martin-developer/" className="fa fa-linkedin icon" id="linkedin" target='_blank' rel='noopener noreferrer'> </a>
+					<a href="https://www.github.com/bnoxb" className="fa fa-github icon" id="github" target='_blank' rel='noopener noreferrer'> </a>
 				</nav>
 				{this.state.showUserEdit ? 
 					<EditUser userToEdit={this.state.userToEdit} handleEditFormInput={this.handleEditFormInput} handleUserEditSubmit={this.handleUserEditSubmit} /> : 
